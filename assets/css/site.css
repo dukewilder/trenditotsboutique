@@ -516,3 +516,21 @@ main { overflow-x: hidden; overflow-x: clip; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- Shopify photos and stock ----------
+   Real product photos fill the arch frames edge to edge. The illustrated samples keep their hanger layout. */
+.card .frame img.photo, .gallery .main img.photo, .thumbs img.photo, .drawer .th img.photo { position: absolute; inset: 0; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; filter: none; transform: none; }
+.card .frame img.photo { transition: transform .5s ease; }
+.card:hover .frame img.photo { animation: none; transform: scale(1.04); }
+.card .frame:has(img.photo)::after, .gallery .main:has(img.photo)::after { border-color: rgba(255, 255, 255, .75); }
+.bowlink .medal img.photo { width: 62%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.card .tag.sold { background: var(--cocoa); color: var(--cream); }
+.price s { font-weight: 400; opacity: .6; margin-right: 4px; }
+.sizes button:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.loadnote { grid-column: 1 / -1; text-align: center; padding: 60px 20px; font: italic 400 22px/1.4 var(--display); list-style: none; }
+.live .rail .name { display: none; }
+.live [data-grid]:empty, .live #shop-grid:empty { min-height: 340px; }
+@media (prefers-reduced-motion: reduce) { .card:hover .frame img.photo { transform: none; } }
+.gallery { min-width: 0; }
+.thumbs { flex-wrap: wrap; }

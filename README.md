@@ -45,12 +45,9 @@ Every page carries a tag that asks search engines to skip it while the listings 
 <meta name="robots" content="noindex">
 ```
 
-## Moving to Shopify
+## Shopify
 
-All sixteen sample listings live in one file, `assets/js/products.js`. Every page reads from it. When the shop is on Shopify there are two ways to go:
-
-- **Keep this site and plug Shopify in.** Replace the contents of `products.js` with products loaded from the store, and send the Checkout button in the bag to Shopify's checkout.
-- **Turn this design into a Shopify theme.** The pages, the stylesheet and the artwork carry over, and Shopify then hosts everything.
+The site is ready to read its listings from Shopify. Fill in `assets/js/config.js` with the store address and the public access token and every page switches from the sample dresses to the real ones, with Shopify's checkout behind the bag. [SHOPIFY.md](SHOPIFY.md) has the steps and the list of which Shopify box feeds which part of the site.
 
 
 ## What is in here
