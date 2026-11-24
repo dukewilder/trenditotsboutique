@@ -24,7 +24,7 @@ The `CNAME` file in this repository tells GitHub the site belongs to `trenditots
 | A | @ | 185.199.111.153 |
 | CNAME | www | dukewilder.github.io |
 
-One switch is left. In **Settings > Pages**, tick **Enforce HTTPS** when GitHub makes the box available. That happens after GitHub finishes checking the DNS and issues the security certificate, which can take up to a day.
+**Enforce HTTPS** is switched on in **Settings > Pages**, so the site always loads over a secure connection.
 
 GitHub's own instructions are here: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 
