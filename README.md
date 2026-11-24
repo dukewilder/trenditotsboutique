@@ -18,7 +18,7 @@ That link is the one to show her.
 
 ## Point trenditots.boutique at it (later)
 
-The domain is connected in this repository through the `CNAME` file. These are the DNS records it needs at the registrar.
+Do this after the site works at the address above.
 
 1. In **Settings > Pages**, type `trenditots.boutique` into **Custom domain** and click **Save**.
 2. Log in where the domain was bought and open its DNS settings. Add four **A** records for the bare domain (host `@`):
