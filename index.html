@@ -11,6 +11,8 @@
 <meta property="og:description" content="Embroidered dresses for toddler girls, for Easter, Christmas, birthdays and picture day.">
 <meta property="og:image" content="assets/img/share.png">
 <meta name="theme-color" content="#F4C2C9">
+<script>/* keep the address bar tidy: /index.html becomes / and /shop.html becomes /shop */
+(function () { var p = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, ''); if (location.protocol.indexOf('http') === 0 && p !== location.pathname) history.replaceState(null, '', p + location.search + location.hash); })();</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon-180x180.png">
@@ -26,13 +28,13 @@
   <div class="wrap header-in">
     <button class="menubtn" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
     <nav class="nav left" aria-label="Shop">
-      <a href="shop.html">Shop all</a>
-      <a href="shop.html?occasion=new">New arrivals</a>
-      <a href="shop.html?occasion=bows">Bows</a>
+      <a href="shop">Shop all</a>
+      <a href="shop?occasion=new">New arrivals</a>
+      <a href="shop?occasion=bows">Bows</a>
     </nav>
-    <a class="brand" href="index.html" aria-label="Trendi Tots Boutique home"><img class="bowmark" src="assets/img/bow-blush.svg" alt="Trendi Tots Boutique" width="74" height="54"></a>
+    <a class="brand" href="./" aria-label="Trendi Tots Boutique home"><img class="bowmark" src="assets/img/bow-blush.svg" alt="Trendi Tots Boutique" width="74" height="54"></a>
     <nav class="nav right" aria-label="More">
-      <a class="hide-sm" href="about.html">Our story</a>
+      <a class="hide-sm" href="about">Our story</a>
       <button class="bagbtn" type="button" data-open-bag aria-label="Open your bag">Bag <span class="bagcount">0</span></button>
     </nav>
   </div>
@@ -51,10 +53,10 @@
     <div class="hero-text">
       <h1 class="hero-name"><img src="assets/img/logo-wordmark.svg" alt="Trendi Tots Boutique" width="640" height="176"></h1>
       <p class="sub">Embroidered dresses for little girls and the days worth dressing up for.</p>
-      <div class="actions"><a class="btn" href="shop.html?occasion=new">Shop new arrivals</a><a class="btn ghost" href="shop.html">See every dress</a><a class="btn ghost" href="brand-kit/01%20Brand%20Book/Trendi%20Tots%20Boutique%20Brand%20Book.pdf" target="_blank" rel="noopener">See the full brand book</a></div>
+      <div class="actions"><a class="btn" href="shop?occasion=new">Shop new arrivals</a><a class="btn ghost" href="shop">See every dress</a><a class="btn ghost" href="brand-kit/01%20Brand%20Book/Trendi%20Tots%20Boutique%20Brand%20Book.pdf" target="_blank" rel="noopener">See the full brand book</a></div>
     </div>
   </div>
-  <div class="rail"><ul><li><a href="product.html?id=rosalie" style="--i:0"><img src="assets/img/products/rosalie.svg" alt="The Rosalie dress on a hanger" width="938" height="1256"><span class="name">The Rosalie</span></a></li><li><a href="product.html?id=birdie" style="--i:1"><img src="assets/img/products/birdie.svg" alt="The Birdie dress on a hanger" width="938" height="1256"><span class="name">The Birdie</span></a></li><li><a href="product.html?id=magnolia" style="--i:2"><img src="assets/img/products/magnolia.svg" alt="The Magnolia dress on a hanger" width="938" height="1256"><span class="name">The Magnolia</span></a></li><li><a href="product.html?id=clementine" style="--i:3"><img src="assets/img/products/clementine.svg" alt="The Clementine dress on a hanger" width="938" height="1256"><span class="name">The Clementine</span></a></li><li><a href="product.html?id=peppermint" style="--i:4"><img src="assets/img/products/peppermint.svg" alt="The Peppermint dress on a hanger" width="938" height="1256"><span class="name">The Peppermint</span></a></li></ul></div>
+  <div class="rail"><ul><li><a href="product?id=rosalie" style="--i:0"><img src="assets/img/products/rosalie.svg" alt="The Rosalie dress on a hanger" width="938" height="1256"><span class="name">The Rosalie</span></a></li><li><a href="product?id=birdie" style="--i:1"><img src="assets/img/products/birdie.svg" alt="The Birdie dress on a hanger" width="938" height="1256"><span class="name">The Birdie</span></a></li><li><a href="product?id=magnolia" style="--i:2"><img src="assets/img/products/magnolia.svg" alt="The Magnolia dress on a hanger" width="938" height="1256"><span class="name">The Magnolia</span></a></li><li><a href="product?id=clementine" style="--i:3"><img src="assets/img/products/clementine.svg" alt="The Clementine dress on a hanger" width="938" height="1256"><span class="name">The Clementine</span></a></li><li><a href="product?id=peppermint" style="--i:4"><img src="assets/img/products/peppermint.svg" alt="The Peppermint dress on a hanger" width="938" height="1256"><span class="name">The Peppermint</span></a></li></ul></div>
   <button class="twirlbtn" type="button" id="twirl"><img src="assets/img/sparkle.svg" alt="">Give them a twirl</button>
   <div class="floor" aria-hidden="true"></div>
 </section>
@@ -64,7 +66,7 @@
 <section class="section blush dotted">
   <div class="wrap">
     <div class="head"><h2>What is the occasion?</h2><p>Every dress in the shop was picked with a day in mind.</p></div>
-    <ul class="occasions"><li><a href="shop.html?occasion=easter"><span class="medal"><img src="assets/img/occ-easter.svg" alt=""></span><b>Easter Sunday</b><span>Pastels and tiny florals</span></a></li><li><a href="shop.html?occasion=christmas"><span class="medal"><img src="assets/img/occ-christmas.svg" alt=""></span><b>Christmas morning</b><span>Cranberry, stripes and green</span></a></li><li><a href="shop.html?occasion=birthday"><span class="medal"><img src="assets/img/occ-birthday.svg" alt=""></span><b>Birthday parties</b><span>Dresses that love cake</span></a></li><li><a href="shop.html?occasion=portraits"><span class="medal"><img src="assets/img/occ-portraits.svg" alt=""></span><b>Picture day</b><span>Classics for the frame</span></a></li></ul>
+    <ul class="occasions"><li><a href="shop?occasion=easter"><span class="medal"><img src="assets/img/occ-easter.svg" alt=""></span><b>Easter Sunday</b><span>Pastels and tiny florals</span></a></li><li><a href="shop?occasion=christmas"><span class="medal"><img src="assets/img/occ-christmas.svg" alt=""></span><b>Christmas morning</b><span>Cranberry, stripes and green</span></a></li><li><a href="shop?occasion=birthday"><span class="medal"><img src="assets/img/occ-birthday.svg" alt=""></span><b>Birthday parties</b><span>Dresses that love cake</span></a></li><li><a href="shop?occasion=portraits"><span class="medal"><img src="assets/img/occ-portraits.svg" alt=""></span><b>Picture day</b><span>Classics for the frame</span></a></li></ul>
   </div>
 </section>
 <div class="scallop-down dotted-edge" aria-hidden="true"></div>
@@ -73,7 +75,7 @@
   <div class="wrap">
     <div class="head"><h2>Just in</h2><p>Fresh off the rail this week.</p></div>
     <ul class="grid" data-grid="rosalie,magnolia,lottie,posy,sugarplum,birdie,clementine,peppermint"></ul>
-    <p class="center mt"><a class="btn ghost" href="shop.html">See every dress</a></p>
+    <p class="center mt"><a class="btn ghost" href="shop">See every dress</a></p>
   </div>
 </section>
 
@@ -81,7 +83,7 @@
 <section class="section cocoa">
   <div class="wrap">
     <div class="head"><h2>Top it off with a bow</h2><p>Four colors on a no-slip clip. One for every dress on the rail.</p></div>
-    <ul class="bowrow"><li><a class="bowlink" href="product.html?id=bow-blush"><span class="medal cream"><img src="assets/img/products/bow-blush.svg" alt=""></span><b>Blush</b><span>Satin &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-blush">Add to bag</button></li><li><a class="bowlink" href="product.html?id=bow-cocoa"><span class="medal cream"><img src="assets/img/products/bow-cocoa.svg" alt=""></span><b>Cocoa</b><span>Velvet &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-cocoa">Add to bag</button></li><li><a class="bowlink" href="product.html?id=bow-berry"><span class="medal cream"><img src="assets/img/products/bow-berry.svg" alt=""></span><b>Cranberry</b><span>Velvet &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-berry">Add to bag</button></li><li><a class="bowlink" href="product.html?id=bow-sky"><span class="medal cream"><img src="assets/img/products/bow-sky.svg" alt=""></span><b>Sky</b><span>Grosgrain &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-sky">Add to bag</button></li></ul>
+    <ul class="bowrow"><li><a class="bowlink" href="product?id=bow-blush"><span class="medal cream"><img src="assets/img/products/bow-blush.svg" alt=""></span><b>Blush</b><span>Satin &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-blush">Add to bag</button></li><li><a class="bowlink" href="product?id=bow-cocoa"><span class="medal cream"><img src="assets/img/products/bow-cocoa.svg" alt=""></span><b>Cocoa</b><span>Velvet &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-cocoa">Add to bag</button></li><li><a class="bowlink" href="product?id=bow-berry"><span class="medal cream"><img src="assets/img/products/bow-berry.svg" alt=""></span><b>Cranberry</b><span>Velvet &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-berry">Add to bag</button></li><li><a class="bowlink" href="product?id=bow-sky"><span class="medal cream"><img src="assets/img/products/bow-sky.svg" alt=""></span><b>Sky</b><span>Grosgrain &nbsp;$12</span></a><button type="button" class="btn small light" data-add="bow-sky">Add to bag</button></li></ul>
   </div>
 </section>
 <div class="scallop-down cocoa-edge" aria-hidden="true"></div>
@@ -89,7 +91,7 @@
 <section class="section fabrics after-band">
   <div class="wrap">
     <div class="head"><h2>Pick her fabric</h2><p>Checks for picnics, rosebuds for Easter, dots for everything else.</p></div>
-    <ul class="swatches"><li><a href="shop.html?occasion=gingham"><span class="swatch"><img src="assets/img/swatch-gingham.svg" alt=""></span><b>Gingham</b></a></li><li><a href="shop.html?occasion=floral"><span class="swatch"><img src="assets/img/swatch-floral.svg" alt=""></span><b>Florals</b></a></li><li><a href="shop.html?occasion=dot"><span class="swatch"><img src="assets/img/swatch-dot.svg" alt=""></span><b>Swiss dots</b></a></li><li><a href="shop.html?occasion=stripe"><span class="swatch"><img src="assets/img/swatch-stripe.svg" alt=""></span><b>Candy stripes</b></a></li><li><a href="shop.html?occasion=solid"><span class="swatch"><img src="assets/img/swatch-solid.svg" alt=""></span><b>Solids</b></a></li></ul>
+    <ul class="swatches"><li><a href="shop?occasion=gingham"><span class="swatch"><img src="assets/img/swatch-gingham.svg" alt=""></span><b>Gingham</b></a></li><li><a href="shop?occasion=floral"><span class="swatch"><img src="assets/img/swatch-floral.svg" alt=""></span><b>Florals</b></a></li><li><a href="shop?occasion=dot"><span class="swatch"><img src="assets/img/swatch-dot.svg" alt=""></span><b>Swiss dots</b></a></li><li><a href="shop?occasion=stripe"><span class="swatch"><img src="assets/img/swatch-stripe.svg" alt=""></span><b>Candy stripes</b></a></li><li><a href="shop?occasion=solid"><span class="swatch"><img src="assets/img/swatch-solid.svg" alt=""></span><b>Solids</b></a></li></ul>
   </div>
 </section>
 
@@ -103,7 +105,7 @@
       <p>Trendi Tots Boutique dresses toddler girls in full skirts, puffed sleeves and collars covered in embroidery.</p>
       <p>Parents come to us before Easter, Christmas, birthdays and picture day. They want their daughter to look like the little girl in the family photo that hangs in the hallway for thirty years.</p>
       <p class="tagline">Between a plain dress and one with an extra ruffle, we stock the ruffle.</p>
-      <a class="link" href="about.html">Read our story</a>
+      <a class="link" href="about">Read our story</a>
     </div>
   </div>
 </section>
@@ -137,9 +139,9 @@
   <div class="wrap">
     <div class="cols">
       <div class="logo"><img src="assets/img/logo-primary-cream.svg" alt="Trendi Tots Boutique" width="210" height="124"><p class="tagline">Made for twirling.</p></div>
-      <div><h3>Shop</h3><ul><li><a href="shop.html?occasion=new">New arrivals</a></li><li><a href="shop.html">All dresses</a></li><li><a href="shop.html?occasion=bows">Bows</a></li></ul></div>
-      <div><h3>Occasions</h3><ul><li><a href="shop.html?occasion=easter">Easter</a></li><li><a href="shop.html?occasion=christmas">Christmas</a></li><li><a href="shop.html?occasion=birthday">Birthdays</a></li><li><a href="shop.html?occasion=portraits">Picture day</a></li></ul></div>
-      <div><h3>Help</h3><ul><li><a href="about.html">Our story</a></li><li><a href="about.html#help">Sizing</a></li><li><a href="about.html#help">Shipping</a></li><li><a href="about.html#help">Say hello</a></li></ul></div>
+      <div><h3>Shop</h3><ul><li><a href="shop?occasion=new">New arrivals</a></li><li><a href="shop">All dresses</a></li><li><a href="shop?occasion=bows">Bows</a></li></ul></div>
+      <div><h3>Occasions</h3><ul><li><a href="shop?occasion=easter">Easter</a></li><li><a href="shop?occasion=christmas">Christmas</a></li><li><a href="shop?occasion=birthday">Birthdays</a></li><li><a href="shop?occasion=portraits">Picture day</a></li></ul></div>
+      <div><h3>Help</h3><ul><li><a href="about">Our story</a></li><li><a href="about#help">Sizing</a></li><li><a href="about#help">Shipping</a></li><li><a href="about#help">Say hello</a></li></ul></div>
     </div>
     <div class="fine"><span>&copy; 2026 Trendi Tots Boutique</span><span>This is a preview of the new shop. Dresses and prices shown are samples.</span></div>
   </div>
@@ -147,7 +149,7 @@
 <div class="scrim" id="scrim" data-close-bag></div>
 <aside class="drawer" id="bag" aria-label="Your bag" aria-hidden="true">
   <header><h2>Your bag</h2><button class="x" type="button" data-close-bag aria-label="Close your bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header>
-  <div class="emptybag" id="bag-empty"><img src="assets/img/bow-blush.svg" alt=""><p>Your bag is empty.</p><a class="btn" href="shop.html">Shop the dresses</a></div>
+  <div class="emptybag" id="bag-empty"><img src="assets/img/bow-blush.svg" alt=""><p>Your bag is empty.</p><a class="btn" href="shop">Shop the dresses</a></div>
   <ul class="items" id="bag-items"></ul>
   <footer id="bag-foot" hidden><div class="sub"><span>Subtotal</span><span id="bag-subtotal">$0</span></div><button class="btn" type="button" id="bag-checkout">Checkout</button><p class="note" id="bag-note" role="status"></p></footer>
 </aside>

@@ -76,10 +76,10 @@
     var tag = p.tag ? '<span class="tag' + (p.tag === 'Holiday' ? ' holiday' : '') + '">' + esc(p.tag) + '</span>' : '';
     var action = p.type === 'bow'
       ? '<button type="button" class="btn small" data-add="' + p.id + '">Add to bag</button>'
-      : '<a class="btn small ghost" href="product.html?id=' + p.id + '">Pick a size</a>';
-    return '<li class="card">' + tag + '<a class="frame" href="product.html?id=' + p.id + '" tabindex="-1" aria-hidden="true" style="--bg:var(--bg-' + p.bg + ')">' +
+      : '<a class="btn small ghost" href="product?id=' + p.id + '">Pick a size</a>';
+    return '<li class="card">' + tag + '<a class="frame" href="product?id=' + p.id + '" tabindex="-1" aria-hidden="true" style="--bg:var(--bg-' + p.bg + ')">' +
       '<img' + (p.type === 'bow' ? ' class="bow"' : '') + ' src="' + img(p) + '" alt=""></a>' +
-      '<div class="info"><h3><a href="product.html?id=' + p.id + '">' + esc(p.name) + '</a></h3><p class="fabric">' + esc(p.fabric) + '</p>' +
+      '<div class="info"><h3><a href="product?id=' + p.id + '">' + esc(p.name) + '</a></h3><p class="fabric">' + esc(p.fabric) + '</p>' +
       '<div class="row"><span class="price">' + money(p.price) + '</span>' + action + '</div></div></li>';
   }
   $$('[data-grid]').forEach(function (g) {
@@ -115,10 +115,10 @@
       $('#shop-empty').hidden = list.length > 0;
       var note = $('#shop-note');
       note.hidden = !FAB[current];
-      if (FAB[current]) note.innerHTML = 'Showing ' + FAB[current] + '. <a href="shop.html">See everything</a>';
+      if (FAB[current]) note.innerHTML = 'Showing ' + FAB[current] + '. <a href="shop">See everything</a>';
       $$('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.f === current ? 'true' : 'false'); });
     };
-    $$('.chip').forEach(function (c) { c.addEventListener('click', function () { current = c.dataset.f; history.replaceState(null, '', current === 'all' ? 'shop.html' : 'shop.html?occasion=' + current); draw(); }); });
+    $$('.chip').forEach(function (c) { c.addEventListener('click', function () { current = c.dataset.f; history.replaceState(null, '', current === 'all' ? 'shop' : 'shop?occasion=' + current); draw(); }); });
     draw();
   }
 
