@@ -12,6 +12,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "petal",
   "type": "dress",
+  "fab": "gingham",
   "sizes": [
    "12M",
    "18M",
@@ -41,6 +42,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "cream",
   "type": "dress",
+  "fab": "floral",
   "sizes": [
    "12M",
    "18M",
@@ -70,6 +72,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "sky",
   "type": "dress",
+  "fab": "gingham",
   "sizes": [
    "12M",
    "18M",
@@ -99,6 +102,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "butter",
   "type": "dress",
+  "fab": "dot",
   "sizes": [
    "12M",
    "18M",
@@ -128,6 +132,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "petal",
   "type": "dress",
+  "fab": "solid",
   "sizes": [
    "12M",
    "18M",
@@ -156,6 +161,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "cream",
   "type": "dress",
+  "fab": "dot",
   "sizes": [
    "12M",
    "18M",
@@ -185,6 +191,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "petal",
   "type": "dress",
+  "fab": "stripe",
   "sizes": [
    "12M",
    "18M",
@@ -214,6 +221,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "mint",
   "type": "dress",
+  "fab": "dot",
   "sizes": [
    "12M",
    "18M",
@@ -243,6 +251,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "lav",
   "type": "dress",
+  "fab": "floral",
   "sizes": [
    "12M",
    "18M",
@@ -272,6 +281,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "sky",
   "type": "dress",
+  "fab": "floral",
   "sizes": [
    "12M",
    "18M",
@@ -301,6 +311,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "butter",
   "type": "dress",
+  "fab": "gingham",
   "sizes": [
    "12M",
    "18M",
@@ -330,6 +341,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "cream",
   "type": "dress",
+  "fab": "gingham",
   "sizes": [
    "12M",
    "18M",
@@ -358,6 +370,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "cream",
   "type": "bow",
+  "fab": "",
   "sizes": [],
   "blurb": "A generous bow with long tails that sits flat against her hair.",
   "details": [
@@ -377,6 +390,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "petal",
   "type": "bow",
+  "fab": "",
   "sizes": [],
   "blurb": "A generous bow with long tails that sits flat against her hair.",
   "details": [
@@ -397,6 +411,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "cream",
   "type": "bow",
+  "fab": "",
   "sizes": [],
   "blurb": "A generous bow with long tails that sits flat against her hair.",
   "details": [
@@ -416,6 +431,7 @@ window.TT_PRODUCTS = [
   ],
   "bg": "sky",
   "type": "bow",
+  "fab": "",
   "sizes": [],
   "blurb": "A generous bow with long tails that sits flat against her hair.",
   "details": [

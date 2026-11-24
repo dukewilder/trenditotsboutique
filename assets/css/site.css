@@ -198,6 +198,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .thumbs img.detail { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 .thumbs img.back { transform: scaleX(-1); }
 .pinfo h1 { font-size: clamp(40px, 5vw, 60px); font-style: italic; }
+.pinfo .fabricline { font: italic 400 21px/1.3 var(--display); color: var(--cocoa-soft); margin: 8px 0 0; }
 .pinfo .price { font: 700 22px/1 var(--body); margin: 14px 0 16px; }
 .pinfo .lede { font-size: 18px; max-width: 30em; }
 .sizes { display: flex; flex-wrap: wrap; gap: 9px; margin: 10px 0 24px; }
@@ -383,6 +384,133 @@ details p { margin-bottom: 16px; }
   .card h3 { font-size: 18px; }
   .hero-cameo { height: 150px; }
   .medal { width: 116px; }
+}
+
+/* ================= a little more of everything ================= */
+.btn.light { background: var(--cream); color: var(--cocoa); border-color: var(--cream); }
+.btn.light:hover { background: var(--blush); border-color: var(--blush); }
+
+/* hero wallpaper and scatter */
+.hero { background: url(../img/wall-bows-cream.svg) center top / 300px; }
+.hero-deco { position: absolute; inset: 0; pointer-events: none; }
+.hero-deco .deco { position: absolute; }
+.hero-lockup, .rail, .twirlbtn { position: relative; z-index: 1; }
+.hero-name { position: relative; }
+.hero-name::after { content: ""; display: block; height: 30px; margin-top: 16px; background: url(../img/bow-blush.svg) center / 44px no-repeat, linear-gradient(var(--cocoa), var(--cocoa)) left center / calc(50% - 34px) 1.6px no-repeat, linear-gradient(var(--cocoa), var(--cocoa)) right center / calc(50% - 34px) 1.6px no-repeat; width: min(640px, 50vw); }
+.hero .sub { margin-top: 16px; }
+.floor { background: url(../img/pattern-gingham-blush.svg) center bottom / 88px; height: 88px; -webkit-mask: none; mask: none; border-top: 4px solid var(--cocoa); margin-top: 30px; }
+
+/* ribbon of words */
+.marquee { background: var(--cocoa); color: var(--cream); overflow: hidden; padding: 15px 0; border-top: 3px solid var(--blush); border-bottom: 3px solid var(--blush); }
+.marquee .track { display: flex; align-items: center; gap: 26px; width: max-content; animation: slide 46s linear infinite; }
+.marquee span { font: italic 400 22px/1 var(--display); white-space: nowrap; }
+.marquee img { width: 20px; flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* dotted blush */
+.section.dotted, .dotted-edge { background-color: var(--blush); background-image: radial-gradient(rgba(255, 253, 250, .5) 2.6px, transparent 3.3px), radial-gradient(rgba(255, 253, 250, .5) 2.6px, transparent 3.3px); background-size: 32px 32px; background-position: 0 0, 16px 16px; }
+.section.dotted { padding-top: 64px; }
+.medal { position: relative; }
+.medal::before { content: ""; position: absolute; left: 50%; top: -9%; width: 34%; aspect-ratio: 74 / 54; transform: translateX(-50%) rotate(-6deg); background: url(../img/bow-cocoa.svg) center / contain no-repeat; }
+.medal.cream { background-image: url(../img/medallion-cream.svg); }
+.medal.cream::before { background-image: url(../img/bow-blush.svg); display: none; }
+
+/* headings with sprigs */
+.head h2 { display: inline-flex; align-items: center; gap: 18px; }
+.head h2::before, .head h2::after { content: ""; flex: none; width: 58px; height: 29px; background: url(../img/sprig.svg) center / contain no-repeat; }
+.head h2::before { transform: scaleX(-1); }
+.head p { margin-top: 10px; }
+
+/* product frames: dotted wallpaper and a lace hem */
+.card .frame, .gallery .main, .thumbs button, .drawer .th { background: radial-gradient(rgba(255, 255, 255, .7) 2.2px, transparent 2.8px) 0 0 / 22px 22px, radial-gradient(rgba(255, 255, 255, .7) 2.2px, transparent 2.8px) 11px 11px / 22px 22px, var(--bg, var(--bg-petal)); }
+.card .frame::before, .gallery .main::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 13px; background: radial-gradient(circle at 50% 100%, var(--cream) 11.5px, transparent 12.5px) center bottom / 26px 13px repeat-x; z-index: 1; }
+.card .frame { transition: transform .35s cubic-bezier(.3, 1.4, .5, 1); }
+.card:hover .frame { transform: translateY(-5px); }
+
+/* fabric swatches */
+.fabrics { padding-top: 10px; }
+.fabrics.after-band { padding-top: 84px; }
+main { overflow-x: hidden; overflow-x: clip; }
+.swatches { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.swatches a { display: block; text-align: center; text-decoration: none; }
+.swatch { display: block; width: min(150px, 100%); aspect-ratio: 1; margin: 0 auto 14px; border-radius: 50%; padding: 9px; background: var(--white); border: 1.8px dashed rgba(107, 78, 61, .45); transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.swatch img { width: 100%; height: 100%; border-radius: 50%; }
+.swatches a:hover .swatch { transform: rotate(10deg) scale(1.06); }
+.swatches b { font: 400 22px/1.2 var(--display); }
+
+/* story band */
+.story .pic { padding: 4% 0; }
+.doily { display: grid; place-items: center; width: min(470px, 92%); aspect-ratio: 1; margin: 0 auto; background: url(../img/doily.svg) center / contain no-repeat; filter: drop-shadow(0 12px 14px rgba(107, 78, 61, .16)); }
+.doily .dresses { width: 90%; margin-top: 4%; }
+
+/* packaging stack */
+.stack .labelimg { width: 50%; left: 0; top: 4%; transform: rotate(-9deg); }
+.stack .sealimg { width: 24%; right: 6%; bottom: 3%; box-shadow: none; border-radius: 50%; transform: rotate(12deg); filter: drop-shadow(0 8px 10px rgba(107, 78, 61, .22)); }
+.stack .cardimg { top: 6%; }
+
+/* cocoa band of bows */
+.section.cocoa, .cocoa-edge { background-color: var(--cocoa); }
+.section.cocoa { background-image: url(../img/wall-bows-cocoa.svg); background-size: 260px; color: var(--cream); }
+.section.cocoa .head p { color: var(--blush); }
+.section.cocoa .head h2::before, .section.cocoa .head h2::after { filter: brightness(1.35) saturate(.9); }
+.gift-section { padding-bottom: 96px; }
+.bowrow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; text-align: center; }
+.bowlink { display: block; text-decoration: none; margin-bottom: 14px; }
+.bowlink .medal img { width: 62%; }
+.bowlink b { display: block; font: 400 26px/1.2 var(--display); }
+.bowlink span:last-child { color: var(--blush); font-size: 15px; }
+.bowlink:hover .medal { transform: rotate(-8deg) scale(1.05); }
+
+/* newsletter stamp */
+.newscard .stamp { position: absolute; width: 112px; right: -30px; top: -34px; transform: rotate(14deg); filter: drop-shadow(0 8px 10px rgba(107, 78, 61, .2)); z-index: 2; }
+
+/* footer edge and wallpaper */
+.footer-edge { margin-top: calc(var(--scallop) / -2); position: relative; z-index: 1; }
+.footer { background-image: url(../img/wall-bows-cocoa.svg); background-size: 260px; }
+
+/* page heads */
+.pagehead .phbow { width: 78px; margin: 0 auto 10px; }
+.shopnote { text-align: center; margin: -24px 0 34px; font: italic 400 20px/1.3 var(--display); }
+.shopnote a { font: 700 12px/1 var(--body); letter-spacing: .18em; text-transform: uppercase; margin-left: 10px; text-underline-offset: 4px; }
+
+@media (max-width: 1320px) { .hero-deco .deco:nth-child(2), .hero-deco .deco:nth-child(3) { display: none; } }
+@media (max-width: 1100px) { .hero-deco .deco:nth-child(n + 7) { display: none; } }
+@media (max-width: 820px) {
+  .hero-name::after { width: min(520px, 84vw); margin: 14px auto 0; }
+  .hero-deco .deco:nth-child(n + 4) { display: none; }
+  .swatches { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
+  .bowrow { grid-template-columns: repeat(2, 1fr); row-gap: 38px; }
+  .head h2 { gap: 12px; }
+  .head h2::before, .head h2::after { width: 40px; height: 20px; }
+  .newscard .stamp { width: 86px; right: -12px; top: -30px; }
+}
+@media (max-width: 600px) {
+  .hero { background-size: 220px; }
+  .hero-deco .deco { display: none; }
+  .hero-deco .deco:nth-child(1) { display: block; left: 3% !important; top: 20px !important; width: 46px !important; }
+  .hero-deco .deco:nth-child(6) { display: block; right: 4% !important; top: 26px !important; width: 30px !important; }
+  .hero-name::after { width: min(330px, 84vw); height: 24px; margin-top: 12px; background-size: 36px, calc(50% - 28px) 1.4px, calc(50% - 28px) 1.4px; }
+  .floor { height: 64px; background-size: 64px; margin-top: 20px; }
+  .fabrics.after-band { padding-top: 52px; }
+  .swatches { display: flex; flex-wrap: wrap; justify-content: center; }
+  .swatches li { width: 30%; }
+  .marquee { padding: 12px 0; }
+  .marquee span { font-size: 19px; }
+  .marquee .track { gap: 20px; }
+  .section.dotted { padding-top: 46px; }
+  .head h2 { display: block; }
+  .head h2::before { display: block; margin: 0 auto 8px; width: 54px; height: 27px; transform: none; }
+  .head h2::after { display: none; }
+  .swatches { gap: 22px 10px; }
+  .swatch { width: min(104px, 100%); padding: 6px; margin-bottom: 8px; }
+  .swatches b { font-size: 18px; }
+  .card .frame::before, .gallery .main::before { height: 10px; background-size: 20px 10px; background-image: radial-gradient(circle at 50% 100%, var(--cream) 8.5px, transparent 9.5px); }
+  .bowlink b { font-size: 22px; }
+  .bowrow { gap: 34px 12px; }
+  .bowrow .btn { width: 100%; padding: 12px 10px; }
+  .gift-section { padding-bottom: 70px; }
+  .pagehead .phbow { width: 60px; }
+  .shopnote { margin: -14px 0 26px; font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

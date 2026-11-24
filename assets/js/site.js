@@ -108,10 +108,14 @@
   var shop = $('#shop-grid');
   if (shop) {
     var current = new URLSearchParams(location.search).get('occasion') || 'all';
+    var FAB = { gingham: 'gingham', floral: 'florals', dot: 'Swiss dots', stripe: 'candy stripes', solid: 'solids' };
     var draw = function () {
-      var list = P.filter(function (p) { return current === 'all' || (current === 'new' ? p.tag === 'New' : p.occ.indexOf(current) > -1); });
+      var list = P.filter(function (p) { return current === 'all' || (current === 'new' ? p.tag === 'New' : (p.occ.indexOf(current) > -1 || p.fab === current)); });
       shop.innerHTML = list.map(card).join('');
       $('#shop-empty').hidden = list.length > 0;
+      var note = $('#shop-note');
+      note.hidden = !FAB[current];
+      if (FAB[current]) note.innerHTML = 'Showing ' + FAB[current] + '. <a href="shop.html">See everything</a>';
       $$('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.f === current ? 'true' : 'false'); });
     };
     $$('.chip').forEach(function (c) { c.addEventListener('click', function () { current = c.dataset.f; history.replaceState(null, '', current === 'all' ? 'shop.html' : 'shop.html?occasion=' + current); draw(); }); });
@@ -129,7 +133,7 @@
     pv.innerHTML =
       '<div class="gallery" style="--bg:var(--bg-' + p.bg + ')"><div class="main"><img id="main-img"' + cls + ' src="' + img(p) + '" alt="' + esc(p.name + ', ' + p.fabric.toLowerCase()) + '"></div>' +
       (views.length > 1 ? '<div class="thumbs">' + views.map(function (v, i) { return '<button type="button" aria-pressed="' + (i === 0) + '" data-view="' + i + '" aria-label="' + v[1] + ' view"><img class="' + v[2] + '" src="' + img(p, v[0]) + '" alt=""></button>'; }).join('') + '</div>' : '') + '</div>' +
-      '<div class="pinfo"><h1>' + esc(p.name) + '</h1><p class="price">' + money(p.price) + '</p><p class="lede">' + esc(p.fabric) + '. ' + esc(p.blurb) + '</p>' +
+      '<div class="pinfo"><h1>' + esc(p.name) + '</h1><p class="fabricline">' + esc(p.fabric) + '</p><p class="price">' + money(p.price) + '</p><p class="lede">' + esc(p.blurb) + '</p>' +
       (isBow ? '' : '<div class="caps">Size</div><div class="sizes">' + p.sizes.map(function (s) { return '<button type="button" aria-pressed="false" data-size="' + s + '">' + s + '</button>'; }).join('') + '</div>') +
       '<div class="buy"><button type="button" class="btn" id="add-btn">Add to bag</button>' + (isBow ? '' : '<button type="button" class="btn ghost" id="spin-btn">Give it a twirl</button>') + '</div>' +
       '<p class="hint" id="add-hint" role="status"></p>' +
@@ -148,7 +152,10 @@
       $$('.thumbs button').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
     }); });
     var more = $('#more-grid');
-    if (more) more.innerHTML = P.filter(function (o) { return o.id !== p.id && o.type === p.type; }).slice(0, 4).map(card).join('');
+    if (more) {
+      var same = P.filter(function (o) { return o.id !== p.id && o.type === p.type; }), rest = P.filter(function (o) { return o.id !== p.id && o.type !== p.type; });
+      more.innerHTML = same.concat(rest).slice(0, 4).map(card).join('');
+    }
   }
 
   renderBag();
