@@ -4,35 +4,27 @@ The preview website for **trenditots.boutique**, plus the full brand kit.
 
 ![Trendi Tots Boutique](assets/img/share.png)
 
-## Turn the site on (two minutes)
+## Where it lives
 
-1. Open this repository on GitHub and click **Settings** (top right of the repo).
-2. In the left menu, click **Pages**.
-3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-4. Set **Branch** to **main** and the folder to **/ (root)**. Click **Save**.
-5. Wait about a minute and refresh the page. GitHub shows the address at the top:
+**https://trenditots.boutique**
 
-   **https://dukewilder.github.io/trenditotsboutique/**
+The site is published with GitHub Pages from the `main` branch. Any change pushed to `main` shows up on the site about a minute later.
 
-That link is the one to show her.
+The backup address `https://dukewilder.github.io/trenditotsboutique/` forwards to the domain.
 
-## Point trenditots.boutique at it (later)
+## How the domain is connected
 
-Do this after the site works at the address above.
+The `CNAME` file in this repository tells GitHub the site belongs to `trenditots.boutique`. The domain's DNS at GoDaddy has these records:
 
-1. In **Settings > Pages**, type `trenditots.boutique` into **Custom domain** and click **Save**.
-2. Log in where the domain was bought and open its DNS settings. Add four **A** records for the bare domain (host `@`):
+| Type | Name | Value |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | dukewilder.github.io |
 
-   ```
-   185.199.108.153
-   185.199.109.153
-   185.199.110.153
-   185.199.111.153
-   ```
-
-3. Add one **CNAME** record with host `www` pointing to `dukewilder.github.io`.
-4. Wait for the change to spread. It can take a few hours.
-5. Back in **Settings > Pages**, tick **Enforce HTTPS** once the box becomes available.
+One switch is left. In **Settings > Pages**, tick **Enforce HTTPS** when GitHub makes the box available. That happens after GitHub finishes checking the DNS and issues the security certificate, which can take up to a day.
 
 GitHub's own instructions are here: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 
