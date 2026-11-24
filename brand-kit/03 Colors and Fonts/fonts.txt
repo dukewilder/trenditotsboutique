@@ -1,0 +1,21 @@
+TRENDI TOTS BOUTIQUE FONTS
+
+Headlines      Playfair Display (Regular for titles, Italic for the sweet little lines)
+Everything else Lato (Regular for paragraphs, Bold in CAPITALS with wide letter spacing for labels and buttons)
+
+Both fonts are free and already inside Canva. Search the font menu for "Playfair Display" and "Lato".
+
+Free downloads for a computer or website:
+https://fonts.google.com/specimen/Playfair+Display
+https://fonts.google.com/specimen/Lato
+
+If neither is available, use Georgia for headlines and Arial for everything else.
+
+The logo is artwork, not a font. Never retype the logo. Always use the logo files.
+
+SET UP A CANVA BRAND KIT (takes five minutes)
+1. In Canva, open "Brand" from the left menu and create a Brand Kit.
+2. Upload the PNG logos from the "02 Logos" folder.
+3. Add the colors: #F4C2C9, #6B4E3D, #FBF6F0, #FCE9EB, #DC8C9C.
+4. Set the heading font to Playfair Display and the body font to Lato.
+After that, every new design can use the brand colors, fonts and logos with one click.

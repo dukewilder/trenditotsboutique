@@ -1,0 +1,36 @@
+TRENDI TOTS BOUTIQUE BRAND KIT
+Made November 2026
+
+OPEN THIS FIRST
+01 Brand Book / Trendi Tots Boutique Brand Book.pdf
+It explains every logo, color, font and template in this folder, with pictures.
+
+WHAT IS IN EACH FOLDER
+01 Brand Book              The rule book. 37 pages.
+02 Logos                   Every logo in every color. PNG for everyday use, SVG and PDF for printers and designers.
+03 Colors and Fonts        The color codes, the palette card, the font names and how to set up Canva.
+04 Social Media            Profile pictures, post and story templates, photo frames, highlight covers, cover photos, shop banners.
+05 Website                 Tab icons, header logos, banners, email images and a style file for a web designer.
+06 Print and Packaging     Print-ready PDFs for cards, tags, stickers, labels, a gift certificate and tissue paper.
+07 Patterns and Icons      Repeating patterns, small icons and decorative pieces.
+
+THREE THINGS TO DO TODAY
+1. Change the profile picture on Facebook, Instagram and TikTok to:
+   04 Social Media / Profile Pictures / profile-01-cameo-on-blush-RECOMMENDED.png
+2. Upload a new Facebook cover from 04 Social Media / Facebook.
+3. Set up a Canva Brand Kit. The steps are in 03 Colors and Fonts / fonts.txt.
+
+WHICH FILE TYPE TO USE
+PNG   Use these almost everywhere. Logo PNGs have a see-through background.
+SVG   Stays sharp at any size. Opens in a web browser. Send to printers, sign makers and web designers.
+PDF   Send to print shops.
+
+THE WEBSITE
+The new shop preview and a copy of this whole kit live at github.com/dukewilder/trenditotsboutique
+The web address is trenditots.boutique
+
+STAND-INS TO REPLACE
+Sizes and prices shown in example captions are stand-ins.
+
+MORE IMAGES WORTH MAKING
+See "Runway prompts for extra images.txt" in this folder.

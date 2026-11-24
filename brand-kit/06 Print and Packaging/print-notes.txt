@@ -1,0 +1,16 @@
+PRINT NOTES
+
+Every PDF in this folder is vector artwork at the real print size, with 0.125 inch of extra background (bleed) on each side.
+The printer trims the bleed off. Upload the PDF and choose the size listed below.
+
+Business card      3.5 x 2 in       The back carries the web address, trenditots.boutique.
+Hang tag           2 x 3.5 in       The small circle marks where the hole goes.
+Thank you card     4 x 6 in
+Round stickers     2 in circle
+Packaging label    4 x 2 in
+Garment label      2 x 0.75 in      Woven label makers usually want one color. Send the cocoa wordmark from the Logos folder.
+Gift certificate   7 x 3 in
+Tissue and wrap    12 x 12 in       The pattern repeats, so the printer can tile it to any sheet size.
+
+The files named "-preview.png" are pictures of the PDFs for quick viewing. Send the PDF to the printer.
+Colors on paper come out slightly different from a screen. Ask for a printed proof on the first order.

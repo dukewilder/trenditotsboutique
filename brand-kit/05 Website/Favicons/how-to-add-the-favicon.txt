@@ -1,0 +1,8 @@
+Most site builders (Shopify, Wix, Squarespace, Etsy Pattern) have a "Favicon" upload box in their theme or brand settings.
+Upload favicon-48x48.png there (or android-chrome-512x512.png if the builder asks for a large square image).
+
+For a hand-coded site, copy the files in this folder to the site root and paste this inside <head>:
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">

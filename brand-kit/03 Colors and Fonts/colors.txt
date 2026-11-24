@@ -1,0 +1,16 @@
+TRENDI TOTS BOUTIQUE COLORS
+
+Name    Hex       RGB             CMYK (approx.)    Use
+------------------------------------------------------------------------------
+Blush   #F4C2C9   244, 194, 201   0, 20, 18, 4      Backgrounds, cards, the bow
+Cocoa   #6B4E3D   107, 78, 61     0, 27, 43, 58     All text, line art, buttons
+Cream   #FBF6F0   251, 246, 240   0, 2, 4, 2        Page background, breathing room
+Petal   #FCE9EB   252, 233, 235   0, 8, 7, 1        Soft panels and tiles
+Rose    #DC8C9C   220, 140, 156   0, 36, 29, 14     Small accents and sale labels
+Latte   #D9BCA3   217, 188, 163   0, 13, 25, 15     Kraft and wood tones
+Sage    #A8AD8B   168, 173, 139   3, 0, 20, 32      Leaves in floral art
+
+CMYK values are a starting point. Ask the printer to match the hex color and send a proof.
+
+Text contrast (WCAG): Cocoa on Cream 7.0, Cocoa on Petal 6.5, Cocoa on Blush 4.8, Cream on Cocoa 7.0. All pass for normal text.
+Rose, Blush, Latte and Sage are too light for text on Cream. Use them for shapes and large headlines only.
