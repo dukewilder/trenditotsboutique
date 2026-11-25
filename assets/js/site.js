@@ -30,19 +30,21 @@
     'handle title descriptionHtml productType ' + TAGS + 'createdAt availableForSale ' +
     'priceRange { minVariantPrice { amount } } compareAtPriceRange { minVariantPrice { amount } } ' +
     'images(first: 6) { nodes { url altText } } variants(first: 16) { nodes { id title availableForSale } } } } }';
+  /* collection key -> the Shopify tags that put a product in it (capital letters do not matter) */
+  var COLL = {
+    valentines: ["valentine's", "valentine's day", 'valentines', 'valentines day'], 'mardi-gras': ['mardi gras'],
+    'st-patricks': ["st patrick's day", "st. patrick's day", "st patrick's", 'st patricks day', 'st patricks'], easter: ['easter'],
+    'mothers-day': ["mother's day", 'mothers day'], 'memorial-day': ['memorial day'], 'fathers-day': ["father's day", 'fathers day'],
+    fourth: ['fourth of july', '4th of july', 'july 4th', 'july fourth'], halloween: ['halloween'], thanksgiving: ['thanksgiving'], christmas: ['christmas'],
+    birthday: ['birthday', 'birthdays'], portraits: ['picture day', 'portraits'], everyday: ['every day sweet', 'everyday sweet', 'every day', 'everyday']
+  };
   var BGS = ['petal', 'cream', 'sky', 'butter', 'mint', 'lav'];
   function fromShopify(n) {
-    var tags = (n.tags || []).map(function (t) { return t.toLowerCase().trim(); });
+    var tags = (n.tags || []).map(function (t) { return t.toLowerCase().replace(/\u2019/g, "'").trim(); });
     var has = function () { for (var i = 0; i < arguments.length; i++) if (tags.indexOf(arguments[i]) > -1) return true; return false; };
-    var type = /bow/i.test(n.productType || '') ? 'bow' : 'dress';
-    var occ = [];
-    if (has('easter')) occ.push('easter');
-    if (has('christmas')) occ.push('christmas');
-    if (has('birthday', 'birthdays')) occ.push('birthday');
-    if (has('picture day', 'portraits', 'portrait')) occ.push('portraits');
-    if (has('everyday')) occ.push('everyday');
-    if (type === 'bow') occ.push('bows');
-    var fab = has('gingham') ? 'gingham' : has('floral', 'florals') ? 'floral' : has('dots', 'dot', 'swiss dot', 'swiss dots') ? 'dot' : has('stripes', 'stripe') ? 'stripe' : has('solid', 'solids') ? 'solid' : '';
+    var type = /brother|boy/i.test(n.productType || '') ? 'brother' : /bow/i.test(n.productType || '') ? 'bow' : 'dress';
+    var occ = Object.keys(COLL).filter(function (k) { return has.apply(null, COLL[k]); });
+    if (type !== 'dress') occ.push(type === 'bow' ? 'bows' : 'brother');
     /* description: the first short sentence is the line under the name, bullets are the details, the rest is the blurb */
     var doc = new DOMParser().parseFromString(n.descriptionHtml || '', 'text/html');
     var details = $$('li', doc).map(function (li) { return li.textContent.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
@@ -60,7 +62,7 @@
     return {
       id: n.handle, name: n.title, fabric: line, blurb: blurb, details: details, price: price, was: was > price ? was : 0,
       tag: soldOut ? 'Sold out' : isNew ? 'New' : has('holiday') ? 'Holiday' : has('best loved', 'best seller', 'bestseller') ? 'Best loved' : '',
-      isNew: isNew, soldOut: soldOut, occ: occ, fab: fab, type: type, bg: BGS[hash % BGS.length],
+      isNew: isNew, soldOut: soldOut, occ: occ, type: type, bg: BGS[hash % BGS.length],
       sizes: single ? [] : vs.map(function (v) { return v.title; }), variants: variants,
       photos: n.images.nodes.map(function (im) { return im.url; }), alts: n.images.nodes.map(function (im) { return im.altText || ''; })
     };
@@ -82,10 +84,18 @@
   function start(P) {
     var byId = function (id) { return P.filter(function (p) { return p.id === id; })[0]; };
     var oneSize = function (p) { return !p.sizes.length; };
+    /* A brother outfit belongs to the dress it names. Samples say so with "match". With Shopify, the outfit's title starts with the dress title:
+       "The Rosalie Brother Outfit" pairs with "The Rosalie". */
+    var dresses = P.filter(function (p) { return p.type === 'dress'; });
+    P.forEach(function (b) {
+      if (b.type !== 'brother') return;
+      var d = b.match ? byId(b.match) : dresses.filter(function (x) { return b.name.toLowerCase().indexOf(x.name.toLowerCase()) === 0; }).sort(function (x, y) { return y.name.length - x.name.length; })[0];
+      b.match = d ? d.id : null; if (d) d.bro = b.id;
+    });
     /* picture for a product: a Shopify photo when there is one, the illustrated sample otherwise */
     var pic = function (p, i, w) {
       if (p.photos) { var u = p.photos[i || 0] || p.photos[0]; return u ? u + (u.indexOf('?') > -1 ? '&' : '?') + 'width=' + (w || 800) : 'assets/img/bow-blush.svg'; }
-      return 'assets/img/products/' + p.id + (i === 1 ? '-detail' : '') + '.svg';
+      return 'assets/img/products/' + p.id + (i === 1 && p.type === 'dress' ? '-detail' : '') + '.svg';
     };
     var cls = function (p) { return p.photos && p.photos.length ? 'photo' : (p.type === 'bow' ? 'bow' : ''); };
     var priceHtml = function (p) { return (p.was ? '<s>' + money(p.was) + '</s> ' : '') + money(p.price); };
@@ -188,13 +198,13 @@
         : '<a class="btn small ghost" href="' + link + '">Pick a size</a>';
       return '<li class="card">' + tag + '<a class="frame" href="' + link + '" tabindex="-1" aria-hidden="true" style="--bg:var(--bg-' + p.bg + ')">' +
         '<img class="' + cls(p) + '" src="' + pic(p, 0, 700) + '" alt=""' + (p.photos ? ' loading="lazy"' : '') + '></a>' +
-        '<div class="info"><h3><a href="' + link + '">' + esc(p.name) + '</a></h3>' + (p.fabric ? '<p class="fabric">' + esc(p.fabric) + '</p>' : '') +
+        '<div class="info"><h3><a href="' + link + '">' + esc(p.name) + '</a></h3>' + (p.fabric ? '<p class="fabric">' + esc(p.fabric) + '</p>' : '') + (p.bro ? '<p class="bromatch">Brother outfit to match</p>' : '') +
         '<div class="row"><span class="price">' + priceHtml(p) + '</span>' + action + '</div></div></li>';
     }
     var sorry = '<li class="loadnote">The dresses are taking a moment to load. Please refresh the page.</li>';
     $$('[data-grid]').forEach(function (g) {
       /* sample mode lists the dresses by name; with Shopify the grid is the eight newest dresses */
-      var list = LIVE ? P.filter(function (p) { return p.type !== 'bow'; }).slice(0, 8) : g.dataset.grid.split(',').map(byId).filter(Boolean);
+      var list = LIVE ? dresses.slice(0, 8) : g.dataset.grid.split(',').map(byId).filter(Boolean);
       g.innerHTML = list.length ? list.map(card).join('') : (LIVE ? sorry : '');
     });
     if (LIVE) {
@@ -232,19 +242,18 @@
     /* ---------- shop page ---------- */
     var shop = $('#shop-grid');
     if (shop) {
-      var current = new URLSearchParams(location.search).get('occasion') || 'all';
-      var FAB = { gingham: 'gingham', floral: 'florals', dot: 'Swiss dots', stripe: 'candy stripes', solid: 'solids' };
+      var q = new URLSearchParams(location.search), current = q.get('collection') || q.get('occasion') || 'all';
+      /* brother outfits live under their own chip and on the dress pages, so the other lists stay one card per dress */
+      var show = function (p) { return current === 'all' ? p.type !== 'brother' : current === 'new' ? (p.isNew && p.type !== 'brother') : p.occ.indexOf(current) > -1; };
       var draw = function () {
         if (LIVE && !P.length) { shop.innerHTML = sorry; return; }
-        var list = P.filter(function (p) { return current === 'all' || (current === 'new' ? p.isNew : (p.occ.indexOf(current) > -1 || p.fab === current)); });
+        var list = P.filter(show);
         shop.innerHTML = list.map(card).join('');
         $('#shop-empty').hidden = list.length > 0;
-        var sn = $('#shop-note');
-        sn.hidden = !FAB[current];
-        if (FAB[current]) sn.innerHTML = 'Showing ' + FAB[current] + '. <a href="shop">See everything</a>';
         $$('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.f === current ? 'true' : 'false'); });
+        var on = $('.chip[aria-pressed="true"]'); if (on && on.scrollIntoView && window.innerWidth < 601) on.scrollIntoView({ block: 'nearest', inline: 'center' });
       };
-      $$('.chip').forEach(function (c) { c.addEventListener('click', function () { current = c.dataset.f; history.replaceState(null, '', current === 'all' ? 'shop' : 'shop?occasion=' + current); draw(); }); });
+      $$('.chip').forEach(function (c) { c.addEventListener('click', function () { current = c.dataset.f; history.replaceState(null, '', current === 'all' ? 'shop' : 'shop?collection=' + current); draw(); }); });
       draw();
     }
 
@@ -259,23 +268,41 @@
       $('#crumb-name').textContent = p.name;
       /* each view is [picture index, label, class]. Shopify products show their photos; samples show front, close up and back. */
       var views = photo ? p.photos.map(function (u, i) { return [i, 'Photo ' + (i + 1), 'photo']; })
-        : p.type === 'bow' ? [[0, 'Front', 'bow']] : [[0, 'Front', ''], [1, 'Close up', 'detail'], [0, 'Back', 'back']];
+        : p.type === 'bow' ? [[0, 'Front', 'bow']] : p.type === 'brother' ? [[0, 'Front', '']] : [[0, 'Front', ''], [1, 'Close up', 'detail'], [0, 'Back', 'back']];
       var alt = (photo && p.alts[0]) || (p.name + (p.fabric ? ', ' + p.fabric.toLowerCase() : ''));
+      var made = p.type === 'bow' ? '' : '<p class="made"><img src="assets/img/step-sew.svg" alt="">' + (p.type === 'brother' ? 'Each outfit is custom made. Three weeks to ship.' : 'Each dress is custom made. Three weeks to ship.') + '</p>';
+      /* the other half of a sister and brother pair */
+      var mate = p.bro ? byId(p.bro) : (p.type === 'brother' && p.match ? byId(p.match) : null), mlink = mate ? 'product?id=' + encodeURIComponent(mate.id) : '', matchHtml = '';
+      if (mate && !(p.type === 'dress' && mate.soldOut)) {
+        var mimg = '<a class="mimg" href="' + mlink + '" tabindex="-1" aria-hidden="true" style="--bg:var(--bg-' + mate.bg + ')"><img class="' + cls(mate) + '" src="' + pic(mate, 0, 300) + '" alt=""></a>';
+        matchHtml = p.type === 'dress'
+          ? '<div class="match">' + mimg + '<div><div class="caps">Matching brother outfit</div><a class="mname" href="' + mlink + '">' + esc(mate.name) + '</a> <span class="mprice">' + priceHtml(mate) + '</span>' +
+            '<div class="mrow">' + (oneSize(mate) ? '' : '<label class="skip" for="bro-size">His size</label><select id="bro-size"><option value="">His size</option>' + mate.sizes.map(function (z) { return '<option' + (!mate.variants || !mate.variants[z] || mate.variants[z].ok ? '' : ' disabled') + '>' + esc(z) + '</option>'; }).join('') + '</select>') +
+            '<button type="button" class="btn small" id="bro-add">Add his outfit</button></div><p class="hint" id="bro-hint" role="status"></p></div></div>'
+          : '<div class="match">' + mimg + '<div><div class="caps">Made to match</div><a class="mname" href="' + mlink + '">' + esc(mate.name) + '</a> <span class="mprice">' + priceHtml(mate) + '</span><div class="mrow"><a class="btn small ghost" href="' + mlink + '">See her dress</a></div></div></div>';
+      }
       pv.innerHTML =
         '<div class="gallery" style="--bg:var(--bg-' + p.bg + ')"><div class="main"><img id="main-img" class="' + pc + '" src="' + pic(p, 0, 1200) + '" alt="' + esc(alt) + '"></div>' +
         (views.length > 1 ? '<div class="thumbs">' + views.map(function (v, i) { return '<button type="button" aria-pressed="' + (i === 0) + '" data-view="' + i + '" aria-label="' + v[1] + '"><img class="' + v[2] + '" src="' + pic(p, v[0], 200) + '" alt=""></button>'; }).join('') + '</div>' : '') + '</div>' +
         '<div class="pinfo"><h1>' + esc(p.name) + '</h1>' + (p.fabric ? '<p class="fabricline">' + esc(p.fabric) + '</p>' : '') + '<p class="price">' + priceHtml(p) + '</p>' + (p.blurb ? '<p class="lede">' + esc(p.blurb) + '</p>' : '') +
         (one ? '' : '<div class="caps">Size</div><div class="sizes">' + p.sizes.map(function (s) { return '<button type="button" aria-pressed="false" data-size="' + esc(s) + '"' + (okSize(s) ? '' : ' disabled title="Sold out"') + '>' + esc(s) + '</button>'; }).join('') + '</div>') +
-        '<div class="buy"><button type="button" class="btn" id="add-btn"' + (p.soldOut ? ' disabled' : '') + '>' + (p.soldOut ? 'Sold out' : 'Add to bag') + '</button>' + (photo || p.type === 'bow' ? '' : '<button type="button" class="btn ghost" id="spin-btn">Give it a twirl</button>') + '</div>' +
-        '<p class="hint" id="add-hint" role="status"></p>' +
+        '<div class="buy"><button type="button" class="btn" id="add-btn"' + (p.soldOut ? ' disabled' : '') + '>' + (p.soldOut ? 'Sold out' : 'Add to bag') + '</button>' + (photo || p.type !== 'dress' ? '' : '<button type="button" class="btn ghost" id="spin-btn">Give it a twirl</button>') + '</div>' +
+        '<p class="hint" id="add-hint" role="status"></p>' + made + matchHtml +
         (p.details.length ? '<details open><summary>The details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></details>' : '') +
         '<details><summary>Sizing help</summary><p>Between sizes? Send us her height and weight and we will help you pick. A full size chart will be added here.</p></details>' +
-        '<details><summary>Shipping and returns</summary><p>Shipping times and the return policy will be listed here when the shop opens.</p></details></div>';
+        '<details><summary>Shipping and returns</summary><p>' + (p.type === 'bow' ? 'Shipping times' : 'Each dress is custom made. Please allow three weeks for it to ship. The return policy') + ' will be listed here when the shop opens.</p></details></div>';
       $$('.sizes button').forEach(function (b) { b.addEventListener('click', function () { size = b.dataset.size; $$('.sizes button').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); $('#add-hint').textContent = ''; }); });
       $('#add-btn').addEventListener('click', function () {
         if (!size) { $('#add-hint').textContent = 'Pick a size first.'; return; }
         var v = p.variants && p.variants[size];
         addToBag(p.id, one ? size : 'Size ' + size, v ? v.id : ''); confetti(this); $('#add-hint').textContent = 'Added to your bag.'; openBag(true);
+      });
+      var ba = $('#bro-add');
+      if (ba) ba.addEventListener('click', function () {
+        var sel = $('#bro-size'), z = sel ? sel.value : 'One size', hint = $('#bro-hint');
+        if (!z) { hint.textContent = 'Pick his size first.'; sel.focus(); return; }
+        var v = mate.variants && mate.variants[z];
+        addToBag(mate.id, sel ? 'Size ' + z : z, v ? v.id : ''); confetti(ba); hint.textContent = 'His outfit is in your bag.'; openBag(true);
       });
       var sb = $('#spin-btn');
       if (sb) sb.addEventListener('click', function () { var m = $('#main-img'); m.classList.remove('spin'); void m.offsetWidth; m.classList.add('spin'); });
@@ -285,7 +312,7 @@
       }); });
       var more = $('#more-grid');
       if (more) {
-        var same = P.filter(function (o) { return o.id !== p.id && o.type === p.type; }), rest = P.filter(function (o) { return o.id !== p.id && o.type !== p.type; });
+        var same = P.filter(function (o) { return o.id !== p.id && o.type === p.type; }), rest = P.filter(function (o) { return o.id !== p.id && o.type !== p.type && o.type !== 'brother'; });
         more.innerHTML = same.concat(rest).slice(0, 4).map(card).join('');
       }
     }

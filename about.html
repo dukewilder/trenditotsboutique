@@ -12,7 +12,7 @@
 <meta property="og:image" content="assets/img/share.png">
 <meta name="theme-color" content="#F4C2C9">
 <script>/* keep the address bar tidy: /index.html becomes / and /shop.html becomes /shop */
-(function () { var p = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, ''); if (location.protocol.indexOf('http') === 0 && p !== location.pathname) history.replaceState(null, '', p + location.search + location.hash); })();</script>
+(function () { var p = location.pathname.replace(/index[.]html$/, '').replace(/[.]html$/, ''); if (location.protocol.indexOf('http') === 0 && p !== location.pathname) history.replaceState(null, '', p + location.search + location.hash); })();</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon-180x180.png">
@@ -23,17 +23,20 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
-<div class="announce">New arrivals are on the rail</div>
+<div class="announce">New arrivals on the rack</div>
 <header class="header">
   <div class="wrap header-in">
     <button class="menubtn" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
     <nav class="nav left" aria-label="Shop">
       <a href="shop">Shop all</a>
-      <a href="shop?occasion=new">New arrivals</a>
-      <a href="shop?occasion=bows">Bows</a>
+      <a href="shop?collection=new">New arrivals</a>
+      <a href="./#collections">Collections</a>
+      <a class="only-sm" href="shop?collection=brother">Brother outfits</a>
+      <a class="only-sm" href="about">Our story</a>
     </nav>
     <a class="brand" href="./" aria-label="Trendi Tots Boutique home"><img src="assets/img/logo-wordmark.svg" alt="Trendi Tots Boutique" width="197" height="54"></a>
     <nav class="nav right" aria-label="More">
+      <a class="hide-sm" href="shop?collection=brother">Brother outfits</a>
       <a class="hide-sm" href="about" aria-current="page">Our story</a>
       <button class="bagbtn" type="button" data-open-bag aria-label="Open your bag">Bag <span class="bagcount">0</span></button>
     </nav>
@@ -46,9 +49,9 @@
   <div class="pagehead"><img class="phbow" src="assets/img/bow-blush.svg" alt=""><h1>Our story</h1></div>
   <div class="aboutgrid" style="padding:30px 0 80px">
     <div>
-      <p class="lede">Trendi Tots Boutique is an online shop for toddler girls. Our dresses have full skirts, puffed sleeves and collars covered in embroidery.</p>
+      <p class="lede">Trendi Tots Boutique is an online shop for little girls. Our dresses have full skirts, puffed sleeves and collars covered in embroidery, and brothers can match.</p>
       <p>Parents come to us before Easter, Christmas, birthdays and picture day. They want their daughter to look like the little girl in the family photo that hangs in the hallway for thirty years.</p>
-      <p>We choose every piece one by one, and we answer every message ourselves. If you are stuck between two sizes or two shades of pink, ask. Helping you pick is our favorite part of the job.</p>
+      <p>Each dress is custom made, and we answer every message ourselves. If you are stuck between two sizes or two shades of pink, ask. Helping you pick is our favorite part of the job.</p>
     </div>
     <div class="center"><img src="assets/img/cameo.svg" alt="Cameo of a little girl with a bow in her hair" width="400" height="510" style="width:min(400px,80%);margin:0 auto;filter:drop-shadow(0 12px 12px rgba(107,78,61,.16))"></div>
   </div>
@@ -58,8 +61,8 @@
   <div class="wrap">
     <div class="head"><h2>What we care about</h2></div>
     <ul class="values">
-      <li><img src="assets/img/bow-cocoa.svg" alt=""><b>More is more</b><p>Between a plain dress and one with an extra ruffle, we stock the ruffle.</p></li>
-      <li><img src="assets/img/bow-cocoa.svg" alt=""><b>Made to be kept</b><p>We choose pieces worth saving for a little sister or a memory box.</p></li>
+      <li><img src="assets/img/bow-cocoa.svg" alt=""><b>More is more</b><p>Between a plain dress and one with an extra ruffle, we make the ruffle.</p></li>
+      <li><img src="assets/img/bow-cocoa.svg" alt=""><b>Made for her</b><p>Each dress is custom made and worth saving for a little sister or a memory box.</p></li>
       <li><img src="assets/img/bow-cocoa.svg" alt=""><b>Sweet and well mannered</b><p>Every message is warm and polite. We thank people and we fix mistakes fast.</p></li>
       <li><img src="assets/img/bow-cocoa.svg" alt=""><b>Small shop service</b><p>A real person answers, with a straight answer on sizing and shipping.</p></li>
     </ul>
@@ -71,7 +74,7 @@
     <div class="head"><h2>Good to know</h2></div>
     <div class="help">
       <article><h3>Sizing</h3><p>Each listing says which way the dress runs. A full size chart will be added here when the shop opens.</p></article>
-      <article><h3>Shipping</h3><p>Shipping times and the return policy will be listed here when the shop opens.</p></article>
+      <article><h3>Custom orders and shipping</h3><p>Each dress is custom made. Please allow three weeks for it to ship. The return policy will be listed here when the shop opens.</p></article>
       <article><h3>Say hello</h3><p>Contact details will be added here when the shop opens.</p></article>
     </div>
   </div>
@@ -83,9 +86,9 @@
   <div class="wrap">
     <div class="cols">
       <div class="logo"><img src="assets/img/logo-primary-cream.svg" alt="Trendi Tots Boutique" width="210" height="124"><p class="tagline">Made for twirling.</p></div>
-      <div><h3>Shop</h3><ul><li><a href="shop?occasion=new">New arrivals</a></li><li><a href="shop">All dresses</a></li><li><a href="shop?occasion=bows">Bows</a></li></ul></div>
-      <div><h3>Occasions</h3><ul><li><a href="shop?occasion=easter">Easter</a></li><li><a href="shop?occasion=christmas">Christmas</a></li><li><a href="shop?occasion=birthday">Birthdays</a></li><li><a href="shop?occasion=portraits">Picture day</a></li></ul></div>
-      <div><h3>Help</h3><ul><li><a href="about">Our story</a></li><li><a href="about#help">Sizing</a></li><li><a href="about#help">Shipping</a></li><li><a href="about#help">Say hello</a></li></ul></div>
+      <div><h3>Shop</h3><ul><li><a href="shop?collection=new">New arrivals</a></li><li><a href="shop">All dresses</a></li><li><a href="shop?collection=brother">Brother outfits</a></li><li><a href="shop?collection=bows">Bows</a></li></ul></div>
+      <div class="colls"><h3>Collections</h3><ul><li><a href="shop?collection=valentines">Valentine's Day</a></li><li><a href="shop?collection=mardi-gras">Mardi Gras</a></li><li><a href="shop?collection=st-patricks">St. Patrick's Day</a></li><li><a href="shop?collection=easter">Easter</a></li><li><a href="shop?collection=mothers-day">Mother's Day</a></li><li><a href="shop?collection=memorial-day">Memorial Day</a></li><li><a href="shop?collection=fathers-day">Father's Day</a></li><li><a href="shop?collection=fourth">Fourth of July</a></li><li><a href="shop?collection=halloween">Halloween</a></li><li><a href="shop?collection=thanksgiving">Thanksgiving</a></li><li><a href="shop?collection=christmas">Christmas</a></li><li><a href="shop?collection=birthday">Birthday</a></li><li><a href="shop?collection=portraits">Picture Day</a></li><li><a href="shop?collection=everyday">Every Day Sweet</a></li></ul></div>
+      <div><h3>Help</h3><ul><li><a href="about">Our story</a></li><li><a href="about#help">Sizing</a></li><li><a href="about#help">Custom orders and shipping</a></li><li><a href="about#help">Say hello</a></li></ul></div>
     </div>
     <div class="fine"><span>&copy; 2026 Trendi Tots Boutique</span><span>This is a preview of the new shop. Dresses and prices shown are samples.</span></div>
   </div>
@@ -95,7 +98,7 @@
   <header><h2>Your bag</h2><button class="x" type="button" data-close-bag aria-label="Close your bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header>
   <div class="emptybag" id="bag-empty"><img src="assets/img/bow-blush.svg" alt=""><p>Your bag is empty.</p><a class="btn" href="shop">Shop the dresses</a></div>
   <ul class="items" id="bag-items"></ul>
-  <footer id="bag-foot" hidden><div class="sub"><span>Subtotal</span><span id="bag-subtotal">$0</span></div><button class="btn" type="button" id="bag-checkout">Checkout</button><p class="note" id="bag-note" role="status"></p></footer>
+  <footer id="bag-foot" hidden><div class="sub"><span>Subtotal</span><span id="bag-subtotal">$0</span></div><p class="madenote">Each dress is custom made. Three weeks to ship.</p><button class="btn" type="button" id="bag-checkout">Checkout</button><p class="note" id="bag-note" role="status"></p></footer>
 </aside>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/products.js"></script>

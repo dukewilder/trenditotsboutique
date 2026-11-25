@@ -38,15 +38,15 @@ The public token is made to sit in a web page. The private token never goes in t
 | Media, first six | Card photo, gallery, bag thumbnail |
 | Price | Price. A higher compare-at price shows crossed out. |
 | Product type containing "Bow" | Listed under Bows and in the bows band on the home page |
+| Product type containing "Brother" | A brother outfit. It pairs with the dress whose title starts its own title: "The Rosalie Brother Outfit" pairs with "The Rosalie". The dress page then offers it in his size. |
 | Variants | Size buttons. A product with one default variant gets an Add to bag button with no size step. |
 | Variant out of stock | That size is greyed out |
 | Whole product out of stock | "Sold out" badge, Add to bag disabled |
-| Tag Easter, Christmas, Birthday, Picture Day, Everyday | Occasion filters |
-| Tag Gingham, Floral, Dots, Stripes, Solid | "Pick her fabric" filters |
+| Tag Valentine's, Mardi Gras, St Patrick's Day, Easter, Mother's Day, Memorial Day, Father's Day, Fourth of July, Halloween, Thanksgiving, Christmas, Birthday, Picture Day, Every Day Sweet | The fourteen collections |
 | Tag Holiday, Best Loved | Badge on the card |
 | Created in the last 30 days, or tag New | "New" badge and the New arrivals filter |
 
-Tags ignore capital letters. The "Just in" grid on the home page is the eight newest dresses. The illustrated dress rail in the hero stays as decoration and links to the shop.
+Tags ignore capital letters. Brother outfits show under their own Brother outfits filter and on the matching dress page. The "Just in" grid on the home page is the eight newest dresses. The illustrated dress rail in the hero stays as decoration and links to the shop.
 
 ## Limits worth knowing
 
@@ -54,7 +54,9 @@ Tags ignore capital letters. The "Just in" grid on the home page is the eight ne
 - Up to 240 products load (8 requests of 30). Each request stays under the Storefront API's 1,000 complexity cap.
 - Listings are kept for 60 seconds per browser tab, so a change in Shopify shows within about a minute.
 - The bag lives in the browser until Checkout. After an order is paid, the next visit finds the Shopify cart gone and empties the bag.
-- The newsletter box, sizing help and shipping text are still placeholders.
+- Each dress is custom made, so untick "Track quantity" on the variants in Shopify. Sizes then never show as sold out.
+- The site says "Each dress is custom made. Three weeks to ship." on dress pages and in the bag. Change the wording in `assets/js/site.js` and the page footer if the lead time changes.
+- The newsletter box, sizing help and return policy text are still placeholders.
 
 ## Tests
 

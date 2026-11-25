@@ -32,7 +32,7 @@ GitHub's own instructions are here: https://docs.github.com/en/pages/configuring
 
 | Real | Stand-in |
 | --- | --- |
-| The logo, colors, fonts and patterns | The sixteen listings, their names, fabrics and prices |
+| The logo, colors, fonts and patterns | The sample listings, their names, fabrics and prices |
 | The story on the home and About pages | The dress drawings (real photos replace them) |
 | The layout on phones and computers | Sizes, the announcement bar and the packaging steps |
 | The bag (it remembers items on one device) | Checkout, the email sign-up, sizing, shipping and contact details |
@@ -53,8 +53,8 @@ The site is ready to read its listings from Shopify. Fill in `assets/js/config.j
 ## What is in here
 
 ```
-index.html          Home page with the dress rail
-shop.html           Every listing, with occasion filters
+index.html          Home page with the dress rack
+shop.html           Every listing, with collection filters
 product.html        One listing (product.html?id=rosalie)
 about.html          The story, values and help
 404.html            The page people see for a broken link
