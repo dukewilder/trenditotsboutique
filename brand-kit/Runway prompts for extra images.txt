@@ -11,28 +11,26 @@ Use the shot list on the Photo style page of the brand book. The prompts below a
 
 1. BLANK STYLED BACKGROUNDS (for posts with text on top, website sections, email headers)
 
-Top-down flat lay on cream linen fabric, blush pink satin ribbon curling along the left edge, a few dried pink rosebuds and a small wooden embroidery hoop in the corners, large empty space in the center for text, soft natural window light, gentle shadows, blush pink and cocoa brown and cream color palette, photorealistic, no text, no logos, no people
+Top-down flat lay on cream linen fabric, blush pink satin ribbon curling along the left edge, a few dried pink flowers and a small wooden embroidery hoop in the corners, large empty space in the center for text, soft natural window light, gentle shadows, blush pink and cocoa brown and cream color palette, photorealistic, no text, no logos, no people
 
-Close-up of blush pink smocked cotton fabric with tiny embroidered rosebuds, soft daylight, shallow depth of field, fills the whole frame, photorealistic texture, no text
+Close-up of blush pink smocked cotton fabric with small embroidered flowers, soft daylight, shallow depth of field, fills the whole frame, photorealistic texture, no text
 
-Cream painted wooden tabletop seen from above, a folded stack of pink tissue paper tied with brown twine on the right side, scattered baby's breath flowers, wide empty area on the left, soft morning light, photorealistic, no text, no logos
-
-
-2. PACKAGING SCENES (for the about page and unboxing posts)
-
-Use the round seal sticker PNG as the reference image.
-
-Top-down photo of an open kraft mailer box lined with blush pink tissue paper printed with small cream bows, the tissue sealed with one round pink sticker, a cream thank you card resting on top, a loop of brown ribbon beside the box, cream linen background, soft natural light, photorealistic product photography
+Cream painted wooden tabletop seen from above, a spool of blush pink thread, a pair of small gold embroidery scissors and a strip of pink gingham fabric on the right side, wide empty area on the left, soft morning light, photorealistic, no text, no logos
 
 
-3. EMBROIDERY-STYLE SPOT ILLUSTRATIONS (stickers, post accents, seasonal graphics)
+2. SISTER AND BROTHER BACKGROUNDS (for the brother outfit posts)
+
+Two small wooden hangers side by side on a cream wall hook rail, empty, with a blush pink ribbon tied on one and a cocoa brown ribbon on the other, soft daylight, room above for text, photorealistic, no text
+
+
+3. EMBROIDERY-STYLE SPOT ILLUSTRATIONS (post accents and graphics for the holiday collections)
 
 Flat vector illustration in the style of simple hand embroidery, a single [SUBJECT], blush pink and cocoa brown on a plain cream background, clean shapes, no shading, centered, no text
 
 Swap [SUBJECT] for each of these and run it once per item:
-rosebud with two leaves
+pink flower with two leaves
 bunny with a bow at its neck
-Christmas stocking with a scalloped cuff
+Christmas stocking with a ruffled cuff
 gingerbread girl
 pumpkin with a curling vine
 Valentine heart with a lace edge
@@ -40,6 +38,13 @@ birthday cupcake with one candle
 pair of mary jane shoes
 rocking horse
 Easter basket with a ribbon handle
+shamrock
+Mardi Gras mask with feathers
+small American flag
+firework burst
+Thanksgiving turkey
+Mother's Day bouquet
+bow tie for Father's Day
 
 
 4. SEASONAL CAMEOS (holiday profile pictures and sale graphics)
