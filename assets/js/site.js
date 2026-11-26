@@ -26,10 +26,10 @@
   }
   /* Tags need the public token. Without one the listings still load and the occasion filters stay empty. */
   var TAGS = (CFG.token || CFG.endpoint) ? 'tags ' : '';
-  var PRODUCTS = 'query ($after: String) { products(first: 30, after: $after, sortKey: CREATED_AT, reverse: true) { pageInfo { hasNextPage endCursor } nodes { ' +
+  var PRODUCTS = 'query ($after: String) { products(first: 60, after: $after, sortKey: CREATED_AT, reverse: true) { pageInfo { hasNextPage endCursor } nodes { ' +
     'handle title descriptionHtml productType ' + TAGS + 'createdAt availableForSale ' +
     'priceRange { minVariantPrice { amount } } compareAtPriceRange { minVariantPrice { amount } } ' +
-    'images(first: 6) { nodes { url altText } } variants(first: 16) { nodes { id title availableForSale } } } } }';
+    'collections(first: 20) { nodes { title } } images(first: 6) { nodes { url altText } } variants(first: 20) { nodes { id title availableForSale } } } } }';
   /* collection key -> the Shopify tags that put a product in it (capital letters do not matter) */
   var COLL = {
     valentines: ["valentine's", "valentine's day", 'valentines', 'valentines day'], 'mardi-gras': ['mardi gras'],
@@ -38,11 +38,15 @@
     fourth: ['fourth of july', '4th of july', 'july 4th', 'july fourth'], halloween: ['halloween'], thanksgiving: ['thanksgiving'], christmas: ['christmas'],
     birthday: ['birthday', 'birthdays'], portraits: ['picture day', 'portraits'], everyday: ['every day sweet', 'everyday sweet', 'every day', 'everyday']
   };
+  var SIZES = ['12M', '18M', '2T', '3T', '4T', '5T'];
   var BGS = ['petal', 'cream', 'sky', 'butter', 'mint', 'lav'];
   function fromShopify(n) {
-    var tags = (n.tags || []).map(function (t) { return t.toLowerCase().replace(/\u2019/g, "'").trim(); });
+    /* a product joins a collection two ways: by being added to the Shopify collection of that name, or by carrying that name as a tag */
+    var tags = (n.tags || []).concat(((n.collections || {}).nodes || []).map(function (c) { return c.title; })).map(function (t) { return t.toLowerCase().replace(/\u2019/g, "'").trim(); });
     var has = function () { for (var i = 0; i < arguments.length; i++) if (tags.indexOf(arguments[i]) > -1) return true; return false; };
-    var type = /brother|boy/i.test(n.productType || '') ? 'brother' : /bow/i.test(n.productType || '') ? 'bow' : 'dress';
+    /* the kind of product comes from its Product type, or failing that from its name: "... Brother Outfit", "... Bow" */
+    var kind = (n.productType || '') + ' ' + n.title;
+    var type = /\b(brother|boys?)\b/i.test(kind) ? 'brother' : /\bbows?\b/i.test(kind) ? 'bow' : 'dress';
     var occ = Object.keys(COLL).filter(function (k) { return has.apply(null, COLL[k]); });
     if (type !== 'dress') occ.push(type === 'bow' ? 'bows' : 'brother');
     /* description: the first short sentence is the line under the name, bullets are the details, the rest is the blurb */
@@ -54,7 +58,10 @@
     var line = m ? m[1].replace(/\.$/, '') : (text.length <= 90 ? text : '');
     var blurb = m ? m[2] : (text.length > 90 ? text : '');
     var vs = n.variants.nodes, single = vs.length === 1 && /^default/i.test(vs[0].title), variants = {};
-    vs.forEach(function (v) { variants[single ? 'One size' : v.title] = { id: v.id, ok: v.availableForSale }; });
+    /* A dress or brother outfit saved without sizes still gets the usual size buttons. The size picked rides along to Shopify as a note on the order line. */
+    var noted = single && type !== 'bow';
+    if (noted) SIZES.forEach(function (z) { variants[z] = { id: vs[0].id, ok: vs[0].availableForSale }; });
+    else vs.forEach(function (v) { variants[single ? 'One size' : v.title] = { id: v.id, ok: v.availableForSale }; });
     var price = parseFloat(n.priceRange.minVariantPrice.amount) || 0, was = parseFloat(n.compareAtPriceRange.minVariantPrice.amount) || 0;
     var hash = 0; for (var i = 0; i < n.handle.length; i++) hash = (hash * 31 + n.handle.charCodeAt(i)) % 997;
     var soldOut = !n.availableForSale;
@@ -63,7 +70,7 @@
       id: n.handle, name: n.title, fabric: line, blurb: blurb, details: details, price: price, was: was > price ? was : 0,
       tag: soldOut ? 'Sold out' : isNew ? 'New' : has('holiday') ? 'Holiday' : has('best loved', 'best seller', 'bestseller') ? 'Best loved' : '',
       isNew: isNew, soldOut: soldOut, occ: occ, type: type, bg: BGS[hash % BGS.length],
-      sizes: single ? [] : vs.map(function (v) { return v.title; }), variants: variants,
+      sizes: noted ? SIZES : single ? [] : vs.map(function (v) { return v.title; }), variants: variants, noted: noted,
       photos: n.images.nodes.map(function (im) { return im.url; }), alts: n.images.nodes.map(function (im) { return im.altText || ''; })
     };
   }
@@ -72,8 +79,8 @@
     var all = [];
     var next = function (after, pages) {
       return gql(PRODUCTS, { after: after }).then(function (d) {
-        all = all.concat(d.products.nodes.map(fromShopify));
-        if (d.products.pageInfo.hasNextPage && pages < 8) return next(d.products.pageInfo.endCursor, pages + 1);
+        all = all.concat(d.products.nodes.filter(function (n) { return !/copy me|^\s*(template|test)\b/i.test(n.title); }).map(fromShopify));
+        if (d.products.pageInfo.hasNextPage && pages < 5) return next(d.products.pageInfo.endCursor, pages + 1);
         try { sessionStorage.setItem('tt-products', JSON.stringify({ t: Date.now(), list: all })); } catch (e) { /* fine without the cache */ }
         return all;
       });
@@ -108,9 +115,9 @@
     bag = bag.filter(function (l) { return byId(l.id); });
     function saveBag() { store(BAGKEY, JSON.stringify(bag)); }
     function bagCount() { return bag.reduce(function (n, l) { return n + l.qty; }, 0); }
-    function addToBag(id, size, variant) {
+    function addToBag(id, size, variant, note) {
       var line = bag.filter(function (l) { return l.id === id && l.size === size; })[0];
-      if (line) line.qty += 1; else bag.push({ id: id, size: size, qty: 1, v: variant || '' });
+      if (line) line.qty += 1; else bag.push({ id: id, size: size, qty: 1, v: variant || '', a: note || '' });
       saveBag(); renderBag(); bump();
     }
     function bump() { $$('.bagcount').forEach(function (b) { b.classList.add('bump'); setTimeout(function () { b.classList.remove('bump'); }, 280); }); }
@@ -153,7 +160,7 @@
     var co = $('#bag-checkout'), note = $('#bag-note');
     if (co) co.addEventListener('click', function () {
       if (!LIVE) { note.textContent = 'Checkout opens soon. This is a preview of the new shop.'; return; }
-      var lines = bag.filter(function (l) { return l.v; }).map(function (l) { return { merchandiseId: l.v, quantity: l.qty }; });
+      var lines = bag.filter(function (l) { return l.v; }).map(function (l) { var o = { merchandiseId: l.v, quantity: l.qty }; if (l.a) o.attributes = [{ key: 'Size', value: l.a }]; return o; });
       if (!lines.length) return;
       co.disabled = true; note.textContent = 'Taking you to checkout.';
       gql('mutation ($lines: [CartLineInput!]!) { cartCreate(input: { lines: $lines }) { cart { id checkoutUrl } userErrors { message } } }', { lines: lines })
@@ -295,14 +302,14 @@
       $('#add-btn').addEventListener('click', function () {
         if (!size) { $('#add-hint').textContent = 'Pick a size first.'; return; }
         var v = p.variants && p.variants[size];
-        addToBag(p.id, one ? size : 'Size ' + size, v ? v.id : ''); confetti(this); $('#add-hint').textContent = 'Added to your bag.'; openBag(true);
+        addToBag(p.id, one ? size : 'Size ' + size, v ? v.id : '', p.noted ? size : ''); confetti(this); $('#add-hint').textContent = 'Added to your bag.'; openBag(true);
       });
       var ba = $('#bro-add');
       if (ba) ba.addEventListener('click', function () {
         var sel = $('#bro-size'), z = sel ? sel.value : 'One size', hint = $('#bro-hint');
         if (!z) { hint.textContent = 'Pick his size first.'; sel.focus(); return; }
         var v = mate.variants && mate.variants[z];
-        addToBag(mate.id, sel ? 'Size ' + z : z, v ? v.id : ''); confetti(ba); hint.textContent = 'His outfit is in your bag.'; openBag(true);
+        addToBag(mate.id, sel ? 'Size ' + z : z, v ? v.id : '', mate.noted && sel ? z : ''); confetti(ba); hint.textContent = 'His outfit is in your bag.'; openBag(true);
       });
       var sb = $('#spin-btn');
       if (sb) sb.addEventListener('click', function () { var m = $('#main-img'); m.classList.remove('spin'); void m.offsetWidth; m.classList.add('spin'); });

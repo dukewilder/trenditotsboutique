@@ -37,21 +37,27 @@ The public token is made to sit in a web page. The private token never goes in t
 | Description, bulleted list | "The details" list |
 | Media, first six | Card photo, gallery, bag thumbnail |
 | Price | Price. A higher compare-at price shows crossed out. |
-| Product type containing "Bow" | Listed under Bows and in the bows band on the home page |
-| Product type containing "Brother" | A brother outfit. It pairs with the dress whose title starts its own title: "The Rosalie Brother Outfit" pairs with "The Rosalie". The dress page then offers it in his size. |
+| Product type or title containing "Bow" | Listed under Bows and in the bows band on the home page |
+| Product type or title containing "Brother" | A brother outfit. It pairs with the dress whose title starts its own title: "The Rosalie Brother Outfit" pairs with "The Rosalie". The dress page then offers it in his size. |
 | Variants | Size buttons. A product with one default variant gets an Add to bag button with no size step. |
 | Variant out of stock | That size is greyed out |
 | Whole product out of stock | "Sold out" badge, Add to bag disabled |
-| Tag Valentine's, Mardi Gras, St Patrick's Day, Easter, Mother's Day, Memorial Day, Father's Day, Fourth of July, Halloween, Thanksgiving, Christmas, Birthday, Picture Day, Every Day Sweet | The fourteen collections |
+| Added to the Shopify collection Valentine's Day, Mardi Gras, St. Patrick's Day, Easter, Mother's Day, Memorial Day, Father's Day, Fourth of July, Halloween, Thanksgiving, Christmas, Birthday, Picture Day or Every Day Sweet (a tag of the same name works too) | The fourteen collections |
 | Tag Holiday, Best Loved | Badge on the card |
 | Created in the last 30 days, or tag New | "New" badge and the New arrivals filter |
 
 Tags ignore capital letters. Brother outfits show under their own Brother outfits filter and on the matching dress page. The "Just in" grid on the home page is the eight newest dresses. The illustrated dress rail in the hero stays as decoration and links to the shop.
 
+## How listings get made
+
+The store holds three draft products named "COPY ME - Dress", "COPY ME - Brother Outfit" and "COPY ME - Bow". Each has the sizes set and inventory tracking switched off. A new listing starts as a duplicate of one of them, set to Active. A product made from scratch with Shopify's default settings tracks inventory at zero and shows as sold out.
+
+Drafts never reach the site, and any title containing "COPY ME" is skipped even when active. A dress saved with no size variants still gets the six size buttons, and the size picked is sent to Shopify as a note on the order line.
+
 ## Limits worth knowing
 
 - The card price is the lowest variant price. Shopify's checkout always charges the real price of the size chosen.
-- Up to 240 products load (8 requests of 30). Each request stays under the Storefront API's 1,000 complexity cap.
+- Up to 300 products load (5 requests of 60).
 - Listings are kept for 60 seconds per browser tab, so a change in Shopify shows within about a minute.
 - The bag lives in the browser until Checkout. After an order is paid, the next visit finds the Shopify cart gone and empties the bag.
 - Each dress is custom made, so untick "Track quantity" on the variants in Shopify. Sizes then never show as sold out.
