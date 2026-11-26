@@ -79,7 +79,7 @@
     var all = [];
     var next = function (after, pages) {
       return gql(PRODUCTS, { after: after }).then(function (d) {
-        all = all.concat(d.products.nodes.filter(function (n) { return !/copy me|^\s*(template|test)\b/i.test(n.title); }).map(fromShopify));
+        all = all.concat(d.products.nodes.filter(function (n) { return !/copy me/i.test(n.title); }).map(fromShopify));
         if (d.products.pageInfo.hasNextPage && pages < 5) return next(d.products.pageInfo.endCursor, pages + 1);
         try { sessionStorage.setItem('tt-products', JSON.stringify({ t: Date.now(), list: all })); } catch (e) { /* fine without the cache */ }
         return all;
