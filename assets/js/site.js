@@ -320,11 +320,16 @@
     renderBag();
   }
 
-  if (!LIVE) {
+  function useSamples() {
     var sample = window.TT_PRODUCTS || [];
     sample.forEach(function (p) { p.isNew = p.tag === 'New'; });
     start(sample);
-  } else {
-    loadShopify().then(start, function () { start([]); });
+  }
+  if (!LIVE) useSamples();
+  else {
+    loadShopify().then(function (list) {
+      /* A connected store with nothing in it yet: keep showing the sample dresses. The first product saved in Shopify replaces them. */
+      if (!list.length) { LIVE = false; useSamples(); } else start(list);
+    }, function () { start([]); });
   }
 })();

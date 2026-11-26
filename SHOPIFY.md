@@ -1,6 +1,6 @@
 # Shopify and this site
 
-The site reads its listings from Shopify once one file is filled in. Until then it shows the sample dresses.
+The site is connected to the Trendi Tots Boutique Shopify store (`sfgdys-hz.myshopify.com`). While that store has no products the site shows the sample dresses. The first product saved in Shopify replaces them.
 
 ## The switch
 
@@ -14,7 +14,7 @@ window.TT_SHOPIFY = {
 };
 ```
 
-- `domain` empty: sample listings from `assets/js/products.js`, and Checkout shows a preview note.
+- `domain` empty, or a connected store with no products yet: sample listings from `assets/js/products.js`, and Checkout shows a preview note.
 - `domain` filled: every page asks Shopify's Storefront API for the products. Checkout creates a Shopify cart and sends the shopper to Shopify's checkout.
 
 The public token is made to sit in a web page. The private token never goes in this repo.
