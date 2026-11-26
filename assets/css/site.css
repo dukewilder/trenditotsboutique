@@ -483,11 +483,12 @@ main { overflow-x: hidden; overflow-x: clip; }
 
 /* ---------- Shopify photos and stock ----------
    Real product photos fill the arch frames edge to edge. The illustrated samples keep their hanger layout. */
-.card .frame img.photo, .gallery .main img.photo, .thumbs img.photo, .drawer .th img.photo { position: absolute; inset: 0; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; filter: none; transform: none; }
+/* a product photo is shown whole, never cropped: centered in the arch with a margin. A cutout on a clear background sits there like the drawn dresses. */
+.card .frame img.photo, .gallery .main img.photo, .thumbs img.photo, .drawer .th img.photo, .match .mimg img.photo { position: absolute; inset: auto; left: 50%; top: 54%; width: auto; height: auto; max-width: 80%; max-height: 80%; transform: translate(-50%, -50%); object-fit: contain; border-radius: 8px; filter: drop-shadow(0 8px 10px rgba(107, 78, 61, .2)); animation: none; }
+.thumbs img.photo, .drawer .th img.photo, .match .mimg img.photo { top: 50%; max-width: 84%; max-height: 84%; border-radius: 4px; filter: none; }
 .card .frame img.photo { transition: transform .5s ease; }
-.card:hover .frame img.photo { animation: none; transform: scale(1.04); }
-.card .frame:has(img.photo)::after, .gallery .main:has(img.photo)::after { border-color: rgba(255, 255, 255, .75); }
-.bowlink .medal img.photo { width: 62%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.card:hover .frame img.photo { animation: none; transform: translate(-50%, -50%) scale(1.04); }
+.bowlink .medal img.photo { width: 62%; height: auto; object-fit: contain; }
 .card .tag.sold { background: var(--cocoa); color: var(--cream); }
 .price s { font-weight: 400; opacity: .6; margin-right: 4px; }
 .sizes button:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
@@ -495,7 +496,7 @@ main { overflow-x: hidden; overflow-x: clip; }
 .loadnote { grid-column: 1 / -1; text-align: center; padding: 60px 20px; font: italic 400 22px/1.4 var(--display); list-style: none; }
 .live .rail .name { display: none; }
 .live [data-grid]:empty, .live #shop-grid:empty { min-height: 340px; }
-@media (prefers-reduced-motion: reduce) { .card:hover .frame img.photo { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card:hover .frame img.photo { transform: translate(-50%, -50%); } }
 .gallery { min-width: 0; }
 .thumbs { flex-wrap: wrap; }
 
@@ -525,7 +526,6 @@ main { overflow-x: hidden; overflow-x: clip; }
 .match::after { content: ""; position: absolute; inset: 8px; border: 1.6px dashed rgba(107, 78, 61, .28); border-radius: 12px; pointer-events: none; }
 .match .mimg { display: block; aspect-ratio: 4 / 5; border-radius: 999px 999px 10px 10px; background: var(--bg, var(--bg-petal)); position: relative; overflow: hidden; }
 .match .mimg img { position: absolute; left: 14%; width: 72%; top: 14%; }
-.match .mimg img.photo { inset: 0; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 .match .caps { margin-bottom: 6px; }
 .match .mname { font: 400 23px/1.2 var(--display); text-decoration: none; }
 .match .mname:hover { text-decoration: underline; text-underline-offset: 4px; }
