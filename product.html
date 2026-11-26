@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=d42ed9c7">
+<link rel="stylesheet" href="assets/css/site.css?v=1c87916c">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
@@ -31,13 +31,14 @@
       <a href="shop" aria-current="page">Shop all</a>
       <a href="shop?collection=new">New arrivals</a>
       <a href="./#collections">Collections</a>
-      <a class="only-sm" href="shop?collection=brother">Brother outfits</a>
       <a class="only-sm" href="about">Our story</a>
+      <a class="only-sm" href="about#size-chart">Size chart</a>
+      <a class="only-sm" href="about#help">Ordering</a>
     </nav>
     <a class="brand" href="./" aria-label="Trendi Tots Boutique home"><img src="assets/img/logo-wordmark.svg" alt="Trendi Tots Boutique" width="197" height="54"></a>
     <nav class="nav right" aria-label="More">
-      <a class="hide-sm" href="shop?collection=brother">Brother outfits</a>
       <a class="hide-sm" href="about">Our story</a>
+      <a class="hide-sm" href="about#help">Ordering</a>
       <button class="bagbtn" type="button" data-open-bag aria-label="Open your bag">Bag <span class="bagcount">0</span></button>
     </nav>
   </div>
@@ -49,6 +50,11 @@
   <p class="crumbs"><a href="shop">The dress rack</a> / <span id="crumb-name"></span></p>
   <div class="product" id="product"></div>
 </div>
+<dialog class="sizedialog" id="size-dialog" aria-labelledby="size-dialog-title">
+  <form method="dialog"><button class="x" aria-label="Close the size chart">&times;</button></form>
+  <h2 id="size-dialog-title">Size chart</h2>
+  <div class="sizechart" data-unit="in"><div class="unitbar" role="group" aria-label="Units"><button type="button" data-unit-btn="in" aria-pressed="true">Inches and pounds</button><button type="button" data-unit-btn="cm" aria-pressed="false">Centimeters and kilos</button></div><div class="tablewrap"><table><thead><tr><th scope="col">Size</th><th scope="col">Age</th><th scope="col">Height</th><th scope="col">Weight</th><th scope="col">Chest</th></tr></thead><tbody><tr><th scope="row">12M</th><td>12 to 18 months</td><td><span class="u-in">28 to 31 in</span><span class="u-cm">71 to 79 cm</span></td><td><span class="u-in">20 to 24 lb</span><span class="u-cm">9 to 11 kg</span></td><td><span class="u-in">19.5 in</span><span class="u-cm">49.5 cm</span></td></tr><tr><th scope="row">18M</th><td>18 to 24 months</td><td><span class="u-in">31 to 33 in</span><span class="u-cm">79 to 84 cm</span></td><td><span class="u-in">24 to 27 lb</span><span class="u-cm">11 to 12 kg</span></td><td><span class="u-in">20 in</span><span class="u-cm">51 cm</span></td></tr><tr><th scope="row">2T</th><td>2 years</td><td><span class="u-in">33 to 36 in</span><span class="u-cm">84 to 91 cm</span></td><td><span class="u-in">27 to 30 lb</span><span class="u-cm">12 to 13.5 kg</span></td><td><span class="u-in">21 in</span><span class="u-cm">53.5 cm</span></td></tr><tr><th scope="row">3T</th><td>3 years</td><td><span class="u-in">36 to 39 in</span><span class="u-cm">91 to 99 cm</span></td><td><span class="u-in">30 to 33 lb</span><span class="u-cm">13.5 to 15 kg</span></td><td><span class="u-in">22 in</span><span class="u-cm">56 cm</span></td></tr><tr><th scope="row">4T</th><td>4 years</td><td><span class="u-in">39 to 42 in</span><span class="u-cm">99 to 107 cm</span></td><td><span class="u-in">33 to 37 lb</span><span class="u-cm">15 to 17 kg</span></td><td><span class="u-in">23 in</span><span class="u-cm">58.5 cm</span></td></tr><tr><th scope="row">5T</th><td>5 years</td><td><span class="u-in">42 to 45 in</span><span class="u-cm">107 to 114 cm</span></td><td><span class="u-in">37 to 42 lb</span><span class="u-cm">17 to 19 kg</span></td><td><span class="u-in">24 in</span><span class="u-cm">61 cm</span></td></tr></tbody></table></div><ul class="measure"><li><b>Height.</b> Stand her against a wall without shoes and measure from the floor to the top of her head.</li><li><b>Chest.</b> Measure around the fullest part of her chest with the tape flat and snug.</li><li><b>Between sizes.</b> Choose the larger size.</li></ul><p class="chartnote">This chart is a general guide to toddler sizes. For help choosing, email her height and weight to <a href="mailto:trenditotsboutique@gmail.com">trenditotsboutique@gmail.com</a>.</p></div>
+</dialog>
 <div class="scallop-up" aria-hidden="true"></div>
 <section class="section blush">
   <div class="wrap"><div class="head"><h2>More from the rack</h2></div><ul class="grid" id="more-grid"></ul></div>
@@ -60,11 +66,11 @@
   <div class="wrap">
     <div class="foot-brand"><img src="assets/img/logo-primary-cream.svg" alt="Trendi Tots Boutique" width="220" height="130"><p class="tagline">Made for twirling.</p></div>
     <nav class="foot-nav" aria-label="Footer">
-      <div><h3>Shop</h3><ul><li><a href="shop?collection=new">New arrivals</a></li><li><a href="shop">All dresses</a></li><li><a href="shop?collection=brother">Brother outfits</a></li><li><a href="shop?collection=bows">Bows</a></li></ul></div>
+      <div><h3>Shop</h3><ul><li><a href="shop?collection=new">New arrivals</a></li><li><a href="shop">All dresses</a></li><li data-kind="brother"><a href="shop?collection=brother">Brother outfits</a></li><li data-kind="bow"><a href="shop?collection=bows">Bows</a></li></ul></div>
       <div class="colls"><h3>Collections</h3><ul><li><a href="shop?collection=valentines">Valentine's Day</a></li><li><a href="shop?collection=mardi-gras">Mardi Gras</a></li><li><a href="shop?collection=st-patricks">St. Patrick's Day</a></li><li><a href="shop?collection=easter">Easter</a></li><li><a href="shop?collection=mothers-day">Mother's Day</a></li><li><a href="shop?collection=memorial-day">Memorial Day</a></li><li><a href="shop?collection=fathers-day">Father's Day</a></li><li><a href="shop?collection=fourth">Fourth of July</a></li><li><a href="shop?collection=halloween">Halloween</a></li><li><a href="shop?collection=thanksgiving">Thanksgiving</a></li><li><a href="shop?collection=christmas">Christmas</a></li><li><a href="shop?collection=birthday">Birthday</a></li><li><a href="shop?collection=portraits">Picture Day</a></li><li><a href="shop?collection=everyday">Every Day Sweet</a></li></ul></div>
-      <div><h3>Help</h3><ul><li><a href="about">Our story</a></li><li><a href="about#help">Sizing</a></li><li><a href="about#help">Custom orders</a></li><li><a href="about#help">Say hello</a></li></ul></div>
+      <div><h3>Help</h3><ul><li><a href="about">Our story</a></li><li><a href="about#size-chart">Size chart</a></li><li><a href="about#help">Ordering information</a></li><li><a href="mailto:trenditotsboutique@gmail.com">Email us</a></li></ul></div>
     </nav>
-    <div class="fine"><span>&copy; 2026 Trendi Tots Boutique</span><span>This is a preview of the new shop. Dresses and prices shown are samples.</span></div>
+    <div class="fine"><span>&copy; 2026 Trendi Tots Boutique LLC</span><span><a href="mailto:trenditotsboutique@gmail.com">trenditotsboutique@gmail.com</a></span><span class="preview">This is a preview of the new shop. Dresses and prices shown are samples.</span></div>
   </div>
 </footer>
 <div class="scrim" id="scrim" data-close-bag></div>
@@ -72,10 +78,10 @@
   <header><h2>Your bag</h2><button class="x" type="button" data-close-bag aria-label="Close your bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header>
   <div class="emptybag" id="bag-empty"><img src="assets/img/bow-blush.svg" alt=""><p>Your bag is empty.</p><a class="btn" href="shop">Shop the dresses</a></div>
   <ul class="items" id="bag-items"></ul>
-  <footer id="bag-foot" hidden><div class="sub"><span>Subtotal</span><span id="bag-subtotal">$0</span></div><p class="madenote">Each dress is custom made. Three weeks to ship.</p><button class="btn" type="button" id="bag-checkout">Checkout</button><p class="note" id="bag-note" role="status"></p></footer>
+  <footer id="bag-foot" hidden><div class="sub"><span>Subtotal</span><span id="bag-subtotal">$0</span></div><label class="notelabel" for="bag-order-note">Note for your order (optional)</label><textarea id="bag-order-note" rows="2" maxlength="500" placeholder="Anything else we should know"></textarea><p class="madenote">Each dress is custom made. Three weeks to ship.</p><button class="btn" type="button" id="bag-checkout">Checkout</button><p class="note" id="bag-note" role="status"></p></footer>
 </aside>
-<script src="assets/js/config.js?v=d42ed9c7"></script>
-<script src="assets/js/products.js?v=d42ed9c7"></script>
-<script src="assets/js/site.js?v=d42ed9c7"></script>
+<script src="assets/js/config.js?v=1c87916c"></script>
+<script src="assets/js/products.js?v=1c87916c"></script>
+<script src="assets/js/site.js?v=1c87916c"></script>
 </body>
 </html>

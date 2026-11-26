@@ -599,3 +599,73 @@ main { overflow-x: hidden; overflow-x: clip; }
 }
 .occasions .medal { width: min(150px, 100%); }
 @media (max-width: 600px) { .occasions .medal { width: min(100px, 100%); } }
+
+/* ---------- personalization, size chart, ordering information ---------- */
+[hidden] { display: none !important; }
+.hero-text { text-align: center; }
+.hero .sub { margin-left: auto; margin-right: auto; }
+.hero .actions { justify-content: center; }
+.wrap.narrow { max-width: 900px; }
+.steps.four { grid-template-columns: repeat(4, 1fr); max-width: 1040px; }
+.steps.four b { font-size: 21px; }
+.help.four { grid-template-columns: repeat(4, 1fr); margin-top: 54px; }
+.help a, .chartnote a, .pinfo details a { text-underline-offset: 3px; }
+.help article p + p { margin-top: 8px; }
+.sizechart { --line: rgba(107, 78, 61, .18); }
+.unitbar { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.unitbar button { border: 1.8px solid var(--cocoa); background: none; color: inherit; border-radius: 999px; padding: 9px 18px; font: 700 11.5px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; }
+.unitbar button[aria-pressed="true"] { background: var(--cocoa); color: var(--cream); }
+.tablewrap { background: var(--white); border-radius: 18px; padding: 8px 18px; position: relative; overflow-x: auto; }
+.sizechart table { width: 100%; border-collapse: collapse; text-align: center; font-size: 16px; min-width: 440px; }
+.sizechart thead th { font: 700 11px/1 var(--body); letter-spacing: .18em; text-transform: uppercase; padding: 16px 8px 14px; border-bottom: 1.6px dashed var(--line); }
+.sizechart tbody th { font: 400 22px/1 var(--display); }
+.sizechart tbody th, .sizechart td { padding: 13px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.sizechart tbody tr:last-child th, .sizechart tbody tr:last-child td { border-bottom: 0; }
+.sizechart[data-unit="in"] .u-cm, .sizechart[data-unit="cm"] .u-in { display: none; }
+.measure { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; font-size: 15.5px; }
+.measure b { display: block; font: 400 20px/1.2 var(--display); margin-bottom: 4px; }
+.chartnote { text-align: center; margin: 22px auto 0; font-size: 15px; max-width: 34em; }
+.sizedialog { border: 0; border-radius: 22px; padding: 34px 30px 30px; background: var(--cream); color: var(--cocoa); width: min(760px, calc(100vw - 28px)); max-height: calc(100vh - 40px); overflow-y: auto; }
+.sizedialog::backdrop { background: rgba(74, 53, 41, .5); }
+.sizedialog h2 { font: 400 34px/1.1 var(--display); text-align: center; margin: 0 0 20px; }
+.sizedialog .x { position: absolute; right: 14px; top: 10px; border: 0; background: none; color: inherit; font-size: 34px; line-height: 1; width: 44px; height: 44px; }
+.sizehead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.linkbtn { border: 0; background: none; padding: 0; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.sizehead .linkbtn { font: 700 11.5px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; }
+.perso { border: 1.6px dashed rgba(107, 78, 61, .32); border-radius: 18px; padding: 16px 20px 20px; margin: 22px 0 6px; min-width: 0; background: var(--white); }
+.perso legend { font: italic 400 24px/1 var(--display); padding: 0 10px; margin-left: -10px; }
+.persohint { font-size: 14.5px; margin: 0 0 14px; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; }
+.field { min-width: 0; }
+.field.wide { grid-column: 1 / -1; }
+.field label, .notelabel { display: block; font: 700 10.5px/1.3 var(--body); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; }
+.field input, .field select, .field textarea, #bro-note, #bag-order-note { width: 100%; border: 1.6px solid rgba(107, 78, 61, .5); border-radius: 12px; padding: 11px 13px; font: 400 16px/1.35 var(--body); color: inherit; background: var(--cream); }
+.field textarea, #bag-order-note { resize: vertical; min-height: 58px; display: block; }
+.field input:focus, .field select:focus, .field textarea:focus, #bro-note:focus, #bag-order-note:focus { outline: 2.5px solid var(--rose); outline-offset: 1px; border-color: var(--cocoa); }
+#bro-note { margin-top: 10px; position: relative; z-index: 1; background: var(--cream); }
+.drawer .at { font-size: 13px; line-height: 1.35; margin-top: 2px; overflow-wrap: anywhere; }
+.drawer .at b { font-weight: 700; }
+.notelabel { margin-top: 2px; }
+#bag-order-note { margin-bottom: 12px; font-size: 15px; background: var(--white); }
+.news .consent { font-size: 12.5px; opacity: .8; margin: 10px auto 0; max-width: 30em; }
+.footer .fine a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 980px) {
+  .help.four { grid-template-columns: 1fr 1fr; }
+  .steps.four { grid-template-columns: 1fr 1fr; gap: 26px 14px; max-width: 520px; }
+}
+@media (max-width: 600px) {
+  .help.four { grid-template-columns: 1fr; margin-top: 36px; }
+  .steps.four b { font-size: 18px; }
+  .measure { grid-template-columns: 1fr; gap: 14px; text-align: center; }
+  .sizechart table { font-size: 15px; }
+  .tablewrap { padding: 4px 10px; }
+  .fields { grid-template-columns: 1fr; }
+  .perso { padding: 14px 16px 18px; }
+  .sizedialog { padding: 30px 16px 22px; }
+  .sizedialog h2 { font-size: 28px; }
+}
+@media (max-width: 600px) {
+  .sizechart th:nth-child(2), .sizechart td:nth-child(2) { display: none; }
+  .sizechart table { min-width: 0; }
+  .sizechart tbody th, .sizechart td { padding: 12px 4px; }
+}

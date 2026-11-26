@@ -27,8 +27,21 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   },
+   {
+    "label": "Thread color",
+    "choices": [
+     "Pink",
+     "Rose",
+     "White"
+    ]
+   }
   ]
  },
  {
@@ -58,8 +71,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -88,8 +106,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -117,8 +140,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -146,8 +174,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -177,8 +210,16 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   },
+   {
+    "label": "Birthday number"
+   }
   ]
  },
  {
@@ -209,8 +250,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -239,8 +285,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -269,8 +320,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -300,8 +356,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -329,8 +390,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -359,8 +425,16 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   },
+   {
+    "label": "Birthday number"
+   }
   ]
  },
  {
@@ -390,8 +464,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -421,8 +500,16 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   },
+   {
+    "label": "Birthday number"
+   }
   ]
  },
  {
@@ -451,8 +538,16 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   },
+   {
+    "label": "Birthday number"
+   }
   ]
  },
  {
@@ -483,8 +578,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
+  ],
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -513,64 +613,13 @@ window.TT_PRODUCTS = [
    "Puffed sleeves with gathered cuffs",
    "Smocked waist with a full, twirly skirt",
    "Three embroidered tulips on the bodice",
-   "Add a monogram on request",
+   "Personalized with her name",
    "Buttons down the back"
-  ]
- },
- {
-  "id": "rosalie-brother",
-  "name": "The Rosalie Brother Outfit",
-  "fabric": "Brother outfit in blush gingham",
-  "price": 44,
-  "tag": "",
-  "occ": [
-   "brother"
   ],
-  "bg": "petal",
-  "type": "brother",
-  "match": "rosalie",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Rosalie so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Rosalie",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "magnolia-brother",
-  "name": "The Magnolia Brother Outfit",
-  "fabric": "Brother outfit in cream floral",
-  "price": 50,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "cream",
-  "type": "brother",
-  "match": "magnolia",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Magnolia so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Magnolia",
-   "White collared shirt underneath",
-   "Add a monogram on request"
+  "asks": [
+   {
+    "label": "Name"
+   }
   ]
  },
  {
@@ -593,96 +642,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Ruby so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Ruby",
    "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "margot-brother",
-  "name": "The Margot Brother Outfit",
-  "fabric": "Brother outfit in purple and gold stripe",
-  "price": 52,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "lav",
-  "type": "brother",
-  "match": "margot",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Margot so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Margot",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "clover-brother",
-  "name": "The Clover Brother Outfit",
-  "fabric": "Brother outfit in kelly green gingham",
-  "price": 44,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "mint",
-  "type": "brother",
-  "match": "clover",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Clover so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Clover",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "lottie-brother",
-  "name": "The Lottie Brother Outfit",
-  "fabric": "Brother outfit in lavender floral",
-  "price": 50,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "lav",
-  "type": "brother",
-  "match": "lottie",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Lottie so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Lottie",
-   "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {
@@ -705,12 +675,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Birdie so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Birdie",
    "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {
@@ -733,40 +708,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Betsy so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Betsy",
    "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "pippa-brother",
-  "name": "The Pippa Brother Outfit",
-  "fabric": "Brother outfit in pumpkin gingham",
-  "price": 48,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "butter",
-  "type": "brother",
-  "match": "pippa",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Pippa so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Pippa",
-   "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {
@@ -789,40 +741,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Hazel so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Hazel",
    "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "sugarplum-brother",
-  "name": "The Sugarplum Brother Outfit",
-  "fabric": "Brother outfit in cranberry pin dot",
-  "price": 54,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "cream",
-  "type": "brother",
-  "match": "sugarplum",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Sugarplum so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Sugarplum",
-   "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {
@@ -845,124 +774,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Peppermint so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Peppermint",
    "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "juniper-brother",
-  "name": "The Juniper Brother Outfit",
-  "fabric": "Brother outfit in sage green dot",
-  "price": 46,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "mint",
-  "type": "brother",
-  "match": "juniper",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Juniper so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Juniper",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "posy-brother",
-  "name": "The Posy Brother Outfit",
-  "fabric": "Brother outfit in petal pink",
-  "price": 48,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "petal",
-  "type": "brother",
-  "match": "posy",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Posy so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Posy",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "clementine-brother",
-  "name": "The Clementine Brother Outfit",
-  "fabric": "Brother outfit in butter yellow Swiss dot",
-  "price": 42,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "butter",
-  "type": "brother",
-  "match": "clementine",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Clementine so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Clementine",
-   "White collared shirt underneath",
-   "Add a monogram on request"
-  ]
- },
- {
-  "id": "daisy-mae-brother",
-  "name": "The Daisy Mae Brother Outfit",
-  "fabric": "Brother outfit in white and blue floral",
-  "price": 48,
-  "tag": "",
-  "occ": [
-   "brother"
-  ],
-  "bg": "sky",
-  "type": "brother",
-  "match": "daisy-mae",
-  "sizes": [
-   "12M",
-   "18M",
-   "2T",
-   "3T",
-   "4T",
-   "5T"
-  ],
-  "blurb": "Made in the same fabric as The Daisy Mae so brother and sister match.",
-  "details": [
-   "Custom made in his size",
-   "Same fabric as The Daisy Mae",
-   "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {
@@ -985,12 +807,17 @@ window.TT_PRODUCTS = [
    "4T",
    "5T"
   ],
+  "asks": [
+   {
+    "label": "Name"
+   }
+  ],
   "blurb": "Made in the same fabric as The Buttercup so brother and sister match.",
   "details": [
    "Custom made in his size",
    "Same fabric as The Buttercup",
    "White collared shirt underneath",
-   "Add a monogram on request"
+   "Personalized with his name"
   ]
  },
  {

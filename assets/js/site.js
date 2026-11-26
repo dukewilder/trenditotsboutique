@@ -51,6 +51,19 @@
     if (type !== 'dress') occ.push(type === 'bow' ? 'bows' : 'brother');
     /* description: the first short sentence is the line under the name, bullets are the details, the rest is the blurb */
     var doc = new DOMParser().parseFromString(n.descriptionHtml || '', 'text/html');
+    /* "Personalize: Name, Birthday number, Thread color (pink / blue / red)" in the description becomes the boxes a shopper fills in.
+       A plain item is a text box. An item with choices in brackets is a drop-down. The line itself is not shown. */
+    var asks = [];
+    $$('p, li, div', doc).forEach(function (el) {
+      var mm = el.textContent.replace(/\s+/g, ' ').trim().match(/^(?:personali[sz]e|personali[sz]ation|customi[sz]e)\s*[:\-\u2013]\s*(.+)$/i);
+      if (!mm || asks.length) return;
+      mm[1].split(/,(?![^(]*\))/).forEach(function (item) {
+        var c = item.trim().replace(/\.$/, '').match(/^([^()]+?)\s*(?:\(([^)]*)\))?$/); if (!c || !c[1]) return;
+        var label = c[1].trim(), choices = c[2] ? c[2].split(/\s*(?:\/|\||\bor\b)\s*/).map(function (x) { return x.trim(); }).filter(Boolean) : null;
+        asks.push({ label: label.charAt(0).toUpperCase() + label.slice(1), choices: choices && choices.length > 1 ? choices : null });
+      });
+      el.remove();
+    });
     var details = $$('li', doc).map(function (li) { return li.textContent.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
     $$('ul, ol', doc).forEach(function (l) { l.remove(); });
     var text = doc.body.textContent.replace(/\s+/g, ' ').trim();
@@ -70,7 +83,7 @@
       id: n.handle, name: n.title, fabric: line, blurb: blurb, details: details, price: price, was: was > price ? was : 0,
       tag: soldOut ? 'Sold out' : isNew ? 'New' : has('holiday') ? 'Holiday' : has('best loved', 'best seller', 'bestseller') ? 'Best loved' : '',
       isNew: isNew, soldOut: soldOut, occ: occ, type: type, bg: BGS[hash % BGS.length],
-      sizes: noted ? SIZES : single ? [] : vs.map(function (v) { return v.title; }), variants: variants, noted: noted,
+      sizes: noted ? SIZES : single ? [] : vs.map(function (v) { return v.title; }), variants: variants, noted: noted, asks: asks,
       photos: n.images.nodes.map(function (im) { return im.url; }), alts: n.images.nodes.map(function (im) { return im.altText || ''; })
     };
   }
@@ -115,9 +128,11 @@
     bag = bag.filter(function (l) { return byId(l.id); });
     function saveBag() { store(BAGKEY, JSON.stringify(bag)); }
     function bagCount() { return bag.reduce(function (n, l) { return n + l.qty; }, 0); }
-    function addToBag(id, size, variant, note) {
-      var line = bag.filter(function (l) { return l.id === id && l.size === size; })[0];
-      if (line) line.qty += 1; else bag.push({ id: id, size: size, qty: 1, v: variant || '', a: note || '' });
+    /* attrs is the personalization for this line: [{key: 'Name', value: 'Amelia'}, ...]. Two lines differ when their size or their personalization differs. */
+    function addToBag(id, size, variant, attrs) {
+      var sig = JSON.stringify(attrs || []);
+      var line = bag.filter(function (l) { return l.id === id && l.size === size && JSON.stringify(l.attrs || []) === sig; })[0];
+      if (line) line.qty += 1; else bag.push({ id: id, size: size, qty: 1, v: variant || '', attrs: attrs || [] });
       saveBag(); renderBag(); bump();
     }
     function bump() { $$('.bagcount').forEach(function (b) { b.classList.add('bump'); setTimeout(function () { b.classList.remove('bump'); }, 280); }); }
@@ -131,6 +146,7 @@
         var p = byId(l.id);
         return '<li><div class="th" style="--bg:var(--bg-' + p.bg + ')"><img class="' + cls(p) + '" src="' + pic(p, 0, 200) + '" alt=""></div>' +
           '<div><div class="nm">' + esc(p.name) + '</div><div class="sz">' + esc(l.size) + '</div>' +
+          (l.attrs || []).filter(function (a) { return a.key !== 'Size'; }).map(function (a) { return '<div class="at"><b>' + esc(a.key) + ':</b> ' + esc(a.value) + '</div>'; }).join('') +
           '<div class="qty"><button type="button" data-q="-1" data-i="' + i + '" aria-label="Remove one ' + esc(p.name) + '">&minus;</button><span>' + l.qty + '</span>' +
           '<button type="button" data-q="1" data-i="' + i + '" aria-label="Add one ' + esc(p.name) + '">+</button></div></div>' +
           '<b>' + money(p.price * l.qty) + '</b></li>';
@@ -151,19 +167,25 @@
       if (a) {
         var ap = byId(a.dataset.add), av = ap && ap.variants ? ap.variants['One size'] : null;
         if (!ap) return;
-        addToBag(ap.id, 'One size', av ? av.id : ''); confetti(a); a.textContent = 'Added'; setTimeout(function () { a.textContent = 'Add to bag'; }, 1400);
+        addToBag(ap.id, 'One size', av ? av.id : '', []); confetti(a); a.textContent = 'Added'; setTimeout(function () { a.textContent = 'Add to bag'; }, 1400);
       }
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') openBag(false); });
+
+    /* ---------- order note ---------- */
+    var on = $('#bag-order-note');
+    if (on) { on.value = store('tt-note') || ''; on.addEventListener('input', function () { store('tt-note', on.value); }); }
 
     /* ---------- checkout ---------- */
     var co = $('#bag-checkout'), note = $('#bag-note');
     if (co) co.addEventListener('click', function () {
       if (!LIVE) { note.textContent = 'Checkout opens soon. This is a preview of the new shop.'; return; }
-      var lines = bag.filter(function (l) { return l.v; }).map(function (l) { var o = { merchandiseId: l.v, quantity: l.qty }; if (l.a) o.attributes = [{ key: 'Size', value: l.a }]; return o; });
+      /* checkoutOpen in config.js stays false until payments are switched on in Shopify */
+      if (!CFG.checkoutOpen) { note.textContent = 'Checkout opens soon. To order now, email trenditotsboutique@gmail.com.'; return; }
+      var lines = bag.filter(function (l) { return l.v; }).map(function (l) { var o = { merchandiseId: l.v, quantity: l.qty }; if (l.attrs && l.attrs.length) o.attributes = l.attrs; return o; });
       if (!lines.length) return;
       co.disabled = true; note.textContent = 'Taking you to checkout.';
-      gql('mutation ($lines: [CartLineInput!]!) { cartCreate(input: { lines: $lines }) { cart { id checkoutUrl } userErrors { message } } }', { lines: lines })
+      gql('mutation ($lines: [CartLineInput!]!, $note: String) { cartCreate(input: { lines: $lines, note: $note }) { cart { id checkoutUrl } userErrors { message } } }', { lines: lines, note: (store('tt-note') || '').trim() || null })
         .then(function (d) {
           var c = d.cartCreate.cart;
           if (!c || !c.checkoutUrl) throw new Error((d.cartCreate.userErrors[0] || {}).message || 'No checkout address came back');
@@ -178,7 +200,7 @@
     /* A cart that has been paid for no longer exists at Shopify. When that happens, empty the bag here too. */
     if (LIVE && store('tt-cart')) {
       gql('query ($id: ID!) { cart(id: $id) { id } }', { id: store('tt-cart') }).then(function (d) {
-        if (!d.cart) { bag = []; saveBag(); store('tt-cart', null); renderBag(); }
+        if (!d.cart) { bag = []; saveBag(); store('tt-cart', null); store('tt-note', null); if (on) on.value = ''; renderBag(); }
       }).catch(function () { /* leave the bag alone if Shopify cannot be reached */ });
     }
 
@@ -242,9 +264,41 @@
       confetti(tb);
     });
 
-    /* ---------- newsletter (nothing is sent anywhere yet) ---------- */
+    /* ---------- newsletter: the email is saved to Shopify's customer list as an email subscriber ---------- */
     var nf = $('#news-form');
-    if (nf) nf.addEventListener('submit', function (e) { e.preventDefault(); $('#news-msg').textContent = 'Thank you. Sign-ups open when the shop launches.'; nf.reset(); confetti(nf.querySelector('button')); });
+    if (nf) nf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = $('#news-email').value.trim(), msg = $('#news-msg'), btn = nf.querySelector('button');
+      if (!(CFG.domain || CFG.endpoint)) { msg.textContent = 'Thank you. Sign-ups open when the shop launches.'; nf.reset(); return; }
+      var rnd = ''; try { var buf = new Uint8Array(18); crypto.getRandomValues(buf); for (var i = 0; i < buf.length; i++) rnd += ('0' + buf[i].toString(16)).slice(-2); } catch (x) { rnd = String(Math.random()).slice(2) + String(Date.now()); }
+      btn.disabled = true; msg.textContent = 'Signing you up.';
+      gql('mutation ($input: CustomerCreateInput!) { customerCreate(input: $input) { customer { id } customerUserErrors { code message } } }', { input: { email: em, password: 'Tt-' + rnd, acceptsMarketing: true } })
+        .then(function (d) {
+          var errs = d.customerCreate.customerUserErrors || [], known = errs.some(function (x) { return x.code === 'TAKEN' || x.code === 'CUSTOMER_DISABLED'; });
+          if (!d.customerCreate.customer && !known) throw new Error(errs.length ? errs[0].message : 'not saved');
+          msg.textContent = known ? 'Thank you. We already have that email.' : 'You are on the list. Thank you.'; nf.reset(); confetti(btn);
+        })
+        .catch(function () { msg.textContent = 'That did not go through. Please try again, or email trenditotsboutique@gmail.com.'; })
+        .then(function () { btn.disabled = false; });
+    });
+
+    /* ---------- size chart: unit switch, and the pop-up on dress pages ---------- */
+    $$('[data-unit-btn]').forEach(function (b) { b.addEventListener('click', function () {
+      var c = b.closest('.sizechart'); c.dataset.unit = b.dataset.unitBtn;
+      $$('[data-unit-btn]', c).forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+    }); });
+    var sd = $('#size-dialog');
+    if (sd) sd.addEventListener('click', function (e) { if (e.target === sd) sd.close(); });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-size-chart]')) return;
+      if (sd && sd.showModal) sd.showModal(); else location.href = 'about#size-chart';
+    });
+
+    /* ---------- links to brother outfits and bows only show when the shop has some ---------- */
+    var hasBro = P.some(function (p) { return p.type === 'brother'; }), hasBow = P.some(function (p) { return p.type === 'bow'; });
+    $$('[data-kind="brother"], .chip[data-f="brother"]').forEach(function (el) { el.hidden = !hasBro; });
+    $$('[data-kind="bow"], .chip[data-f="bows"]').forEach(function (el) { el.hidden = !hasBow; });
+    $$('.preview').forEach(function (el) { el.hidden = LIVE; });
 
     /* ---------- shop page ---------- */
     var shop = $('#shop-grid');
@@ -285,31 +339,46 @@
         matchHtml = p.type === 'dress'
           ? '<div class="match">' + mimg + '<div><div class="caps">Matching brother outfit</div><a class="mname" href="' + mlink + '">' + esc(mate.name) + '</a> <span class="mprice">' + priceHtml(mate) + '</span>' +
             '<div class="mrow">' + (oneSize(mate) ? '' : '<label class="skip" for="bro-size">His size</label><select id="bro-size"><option value="">His size</option>' + mate.sizes.map(function (z) { return '<option' + (!mate.variants || !mate.variants[z] || mate.variants[z].ok ? '' : ' disabled') + '>' + esc(z) + '</option>'; }).join('') + '</select>') +
-            '<button type="button" class="btn small" id="bro-add">Add his outfit</button></div><p class="hint" id="bro-hint" role="status"></p></div></div>'
+            '<button type="button" class="btn small" id="bro-add">Add his outfit</button></div>' +
+            '<label class="skip" for="bro-note">Personalization for his outfit</label><input id="bro-note" type="text" maxlength="60" autocomplete="off" placeholder="' + esc((mate.asks || [])[0] ? mate.asks[0].label + ' for his outfit (optional)' : 'Requests for his outfit (optional)') + '">' +
+            '<p class="hint" id="bro-hint" role="status"></p></div></div>'
           : '<div class="match">' + mimg + '<div><div class="caps">Made to match</div><a class="mname" href="' + mlink + '">' + esc(mate.name) + '</a> <span class="mprice">' + priceHtml(mate) + '</span><div class="mrow"><a class="btn small ghost" href="' + mlink + '">See her dress</a></div></div></div>';
       }
+      /* the boxes a shopper fills in to make this one hers: whatever the listing asks for, plus room for anything else */
+      var fields = function (q, pre) {
+        return (q.asks || []).map(function (a, i) {
+          var id = pre + '-ask-' + i;
+          return '<div class="field"><label for="' + id + '">' + esc(a.label) + '</label>' + (a.choices
+            ? '<select id="' + id + '" data-ask="' + esc(a.label) + '"><option value="">As shown</option>' + a.choices.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('') + '</select>'
+            : '<input id="' + id + '" type="text" maxlength="60" autocomplete="off" data-ask="' + esc(a.label) + '">') + '</div>';
+        }).join('') + '<div class="field wide"><label for="' + pre + '-req">Special requests</label><textarea id="' + pre + '-req" rows="2" maxlength="300" data-ask="Special requests" placeholder="Optional"></textarea></div>';
+      };
+      var answers = function (root) { return $$('[data-ask]', root).map(function (el) { return { key: el.dataset.ask, value: el.value.trim() }; }).filter(function (a) { return a.value; }); };
+      var perso = p.type === 'bow' ? '' : '<fieldset class="perso" id="perso"><legend>' + (p.type === 'brother' ? 'Make it his' : 'Make it hers') + '</legend><p class="persohint">' +
+        ((p.asks || []).length ? 'Tell us what you would like embroidered. Leave a box blank to keep that part as shown.' : 'Would you like anything changed or added? Tell us here.') + '</p><div class="fields">' + fields(p, 'p') + '</div></fieldset>';
       pv.innerHTML =
         '<div class="gallery" style="--bg:var(--bg-' + p.bg + ')"><div class="main"><img id="main-img" class="' + pc + '" src="' + pic(p, 0, 1200) + '" alt="' + esc(alt) + '"></div>' +
         (views.length > 1 ? '<div class="thumbs">' + views.map(function (v, i) { return '<button type="button" aria-pressed="' + (i === 0) + '" data-view="' + i + '" aria-label="' + v[1] + '"><img class="' + v[2] + '" src="' + pic(p, v[0], 200) + '" alt=""></button>'; }).join('') + '</div>' : '') + '</div>' +
         '<div class="pinfo"><h1>' + esc(p.name) + '</h1>' + (p.fabric ? '<p class="fabricline">' + esc(p.fabric) + '</p>' : '') + '<p class="price">' + priceHtml(p) + '</p>' + (p.blurb ? '<p class="lede">' + esc(p.blurb) + '</p>' : '') +
-        (one ? '' : '<div class="caps">Size</div><div class="sizes">' + p.sizes.map(function (s) { return '<button type="button" aria-pressed="false" data-size="' + esc(s) + '"' + (okSize(s) ? '' : ' disabled title="Sold out"') + '>' + esc(s) + '</button>'; }).join('') + '</div>') +
+        (one ? '' : '<div class="sizehead"><span class="caps">Size</span><button type="button" class="linkbtn" data-size-chart>Size chart</button></div><div class="sizes">' + p.sizes.map(function (s) { return '<button type="button" aria-pressed="false" data-size="' + esc(s) + '"' + (okSize(s) ? '' : ' disabled title="Sold out"') + '>' + esc(s) + '</button>'; }).join('') + '</div>') + perso +
         '<div class="buy"><button type="button" class="btn" id="add-btn"' + (p.soldOut ? ' disabled' : '') + '>' + (p.soldOut ? 'Sold out' : 'Add to bag') + '</button>' + (photo || p.type !== 'dress' ? '' : '<button type="button" class="btn ghost" id="spin-btn">Give it a twirl</button>') + '</div>' +
         '<p class="hint" id="add-hint" role="status"></p>' + made + matchHtml +
         (p.details.length ? '<details open><summary>The details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></details>' : '') +
-        '<details><summary>Sizing help</summary><p>Between sizes? Send us her height and weight and we will help you pick. A full size chart will be added here.</p></details>' +
-        '<details><summary>Shipping and returns</summary><p>' + (p.type === 'bow' ? 'Shipping times' : 'Each dress is custom made. Please allow three weeks for it to ship. The return policy') + ' will be listed here when the shop opens.</p></details></div>';
+        (p.type === 'bow' ? '' : '<details><summary>Sizing help</summary><p>Sizes run from 12 months to 5T. <button type="button" class="linkbtn" data-size-chart>Open the size chart</button></p><p>Between sizes? Email her height and weight to <a href="mailto:trenditotsboutique@gmail.com">trenditotsboutique@gmail.com</a> and we will help you pick.</p></details>') +
+        '<details><summary>Shipping and returns</summary><p>' + (p.type === 'bow' ? 'You will get an email with tracking when your order is on its way.' : 'Each dress is custom made. Please allow three weeks for it to ship. You will get an email with tracking when it is on its way.') + '</p><p>Our return policy will be posted here before the shop opens.</p></details></div>';
       $$('.sizes button').forEach(function (b) { b.addEventListener('click', function () { size = b.dataset.size; $$('.sizes button').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); $('#add-hint').textContent = ''; }); });
       $('#add-btn').addEventListener('click', function () {
         if (!size) { $('#add-hint').textContent = 'Pick a size first.'; return; }
         var v = p.variants && p.variants[size];
-        addToBag(p.id, one ? size : 'Size ' + size, v ? v.id : '', p.noted ? size : ''); confetti(this); $('#add-hint').textContent = 'Added to your bag.'; openBag(true);
+        addToBag(p.id, one ? size : 'Size ' + size, v ? v.id : '', (p.noted ? [{ key: 'Size', value: size }] : []).concat(answers($('#perso')))); confetti(this); $('#add-hint').textContent = 'Added to your bag.'; openBag(true);
       });
       var ba = $('#bro-add');
       if (ba) ba.addEventListener('click', function () {
         var sel = $('#bro-size'), z = sel ? sel.value : 'One size', hint = $('#bro-hint');
         if (!z) { hint.textContent = 'Pick his size first.'; sel.focus(); return; }
         var v = mate.variants && mate.variants[z];
-        addToBag(mate.id, sel ? 'Size ' + z : z, v ? v.id : '', mate.noted && sel ? z : ''); confetti(ba); hint.textContent = 'His outfit is in your bag.'; openBag(true);
+        var bn = $('#bro-note').value.trim();
+        addToBag(mate.id, sel ? 'Size ' + z : z, v ? v.id : '', (mate.noted && sel ? [{ key: 'Size', value: z }] : []).concat(bn ? [{ key: (mate.asks || [])[0] ? mate.asks[0].label : 'Special requests', value: bn }] : [])); confetti(ba); hint.textContent = 'His outfit is in your bag.'; openBag(true);
       });
       var sb = $('#spin-btn');
       if (sb) sb.addEventListener('click', function () { var m = $('#main-img'); m.classList.remove('spin'); void m.offsetWidth; m.classList.add('spin'); });
