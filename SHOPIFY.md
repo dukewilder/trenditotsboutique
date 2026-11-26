@@ -48,6 +48,16 @@ The public token is made to sit in a web page. The private token never goes in t
 
 Tags ignore capital letters. Brother outfits show under their own Brother outfits filter and on the matching dress page. The "Just in" grid on the home page is the eight newest dresses. The illustrated dress rail in the hero stays as decoration and links to the shop.
 
+## Personalization, notes and emails
+
+- A description line that starts with `Personalize:` turns into boxes on the product page. `Personalize: Name, Birthday number, Thread color (pink / blue / red)` gives two text boxes and one drop-down. The line itself is hidden from shoppers.
+- Every product page also has a Special requests box, and the bag has an order note.
+- Each answer travels to Shopify as a line item property and shows on the order under that item. The order note shows in the order's Notes box.
+- A brother outfit pairs with the dress whose name starts its own name: "The Rosalie Brother Outfit" appears on "The Rosalie". Its Product type must be Brother.
+- The newsletter form creates a Shopify customer with email marketing turned on (Customers in the admin). Checkout collects an email on every order and offers the same opt-in.
+- `checkoutOpen` in `assets/js/config.js` stays `false` until Shopify Payments is on and the store password is off. While it is false the Checkout button tells shoppers to email instead.
+- The size chart lives in `sitebuild.py` (`SIZEROWS`). It shows on the About page and in a pop-up beside the size buttons.
+
 ## How listings get made
 
 The store holds three draft products named "COPY ME - Dress", "COPY ME - Brother Outfit" and "COPY ME - Bow". Each has the sizes set and inventory tracking switched off. A new listing starts as a duplicate of one of them, set to Active. A product made from scratch with Shopify's default settings tracks inventory at zero and shows as sold out.
