@@ -674,3 +674,6 @@ main { overflow-x: hidden; overflow-x: clip; }
   .story { text-align: center; }
   .story p { margin-left: auto; margin-right: auto; }
 }
+.doily .dresses { width: 84%; }
+.card .frame::before, .gallery .main::before { display: none; }
+.card .frame, .gallery .main { border-radius: 50% 50% 14px 14px / 40% 40% 14px 14px; }
